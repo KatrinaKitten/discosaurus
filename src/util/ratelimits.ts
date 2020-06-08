@@ -1,18 +1,36 @@
 
+/** Unwrap promise types to their awaited return values. */
 type Await<T> = T extends { then(onfulfilled?: (value: infer U) => unknown): unknown; } ? U : T;
+
+/** Rate limit information returned from the `limitBy` callback. */
 type LimitGetter<T> = (result: T) => { 
+  /** If true, the request hit the rate limit unexpectedly and failed. */
   wasRateLimited: boolean,
+  /** The number of requests remaining until rate limiting. */
   remaining: number, 
+  /** The epoch time at which the bucket should reset. */
   resetAt: number, 
+  /** The epoch time at which the global limit should reset, if any. */
   globalReset?: number,
+  /** The group bucket to link this specific bucket to, if any. */
   groupBucket?: string
 }
 
+/**
+ * A simple request rate limiter.
+ */
 export class RateLimiter {
   private buckets: {[name:string]: { remaining: number, resetAt: number }} = {}
   private queue: {[bucket:string]: { callback: () => any, resolve: (res: any) => void, limitBy: LimitGetter<any> }[]} = {}
   private groupedBuckets: {[bucket:string]: string} = {}
 
+  /**
+   * Limit a request by the given bucket.
+   * 
+   * @param bucket The rate limit bucket to apply.
+   * @param callback The function to call to make the request.
+   * @param limitBy A callback to retrieve rate limiting information; will be passed the result of `callback`.
+   */
   limit<T>(bucket: string, callback: () => T, limitBy: LimitGetter<Await<T>>): Promise<T> {
     return new Promise(resolve => {
       this.queue[bucket] ?? (this.queue[bucket] = [])
@@ -21,9 +39,16 @@ export class RateLimiter {
     })
   }
 
+  /** Bucket-specific lock for `flushQueue`. */
   private queueLock: {[bucket:string]: number} = {}
+  /** The epoch time at which the global rate limit resets. */
   private globalReset?: number
 
+  /**
+   * Flush queued requests from the given bucket.
+   * Returns early if the given bucket is already being flushed.
+   * @param bucket The bucket to flush.
+   */
   private async flushQueue(bucket: string) {
     if(this.queueLock[bucket]) return
     this.queueLock[bucket] = +new Date
@@ -47,6 +72,7 @@ export class RateLimiter {
           result = await queued?.callback(),
           limits = queued?.limitBy(result)
 
+      // Handle request failure and retry, or resolve the request's promise
       if(!limits?.wasRateLimited) {
         queued?.resolve(result)
       } else {
@@ -55,6 +81,7 @@ export class RateLimiter {
         queuedBucket.remaining = 0
       }
 
+      // Update rate limits with information from limitBy
       queuedBucket.remaining = limits?.remaining ?? queuedBucket.remaining
       queuedBucket.resetAt = limits?.resetAt ?? queuedBucket.resetAt
 

@@ -4,6 +4,16 @@ import { objectEntries } from '../util/functions.ts'
 const apiBase = 'https://discord.com/api/'
 const rateLimiter = new RateLimiter()
 
+/**
+ * Make a request to Discord's API.
+ * This should almost never be called directly! Use generated methods for specific endpoints instead.
+ * 
+ * @param token The bot token to authenticate with.
+ * @param method The HTTP method to use.
+ * @param path The endpoint path in Discord's API, prefilled with any path parameters.
+ * @param queryData Parameters to be serialized as a query string.
+ * @param bodyData Parameters to be passed in the request body.
+ */
 export async function makeRequest(
   token: string, 
   method: 'get'|'post'|'put'|'patch'|'delete', 
@@ -11,9 +21,8 @@ export async function makeRequest(
   queryData?: {[k:string]: any}, 
   bodyData?: object
 ) {
-  let url = apiBase+path
   let body = bodyData && JSON.stringify(bodyData)
-  url += '?'+new URLSearchParams(objectEntries(queryData||{}).map(([k,v]) => [k,encodeURI(v.toString())])).toString()
+  let url = apiBase+path+'?'+new URLSearchParams(objectEntries(queryData||{}).map(([k,v]) => [k,encodeURI(v.toString())])).toString()
 
   let resp = await rateLimiter.limit(path, () => fetch(url, {
     method: method.toUpperCase(),
