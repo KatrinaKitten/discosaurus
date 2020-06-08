@@ -1,3 +1,364 @@
 {
-  "$schema": "./endpoints-schema.json"
+  "$schema": "./endpoints-schema.json",
+
+  "imports": {
+    "Channel": "../types/channels.ts",
+    "Embed": "../types/messages.ts",
+    "PermissionOverwrite": "../types/permissions.ts",
+    "Role": "../types/roles.ts"
+  },
+
+  "enums": {
+    "AuditLogEvent": [ "GUILD_UPDATE = 1", "CHANNEL_CREATE = 10", "CHANNEL_UPDATE = 11", "CHANNEL_DELETE = 12", "CHANNEL_OVERWRITE_CREATE = 13", "CHANNEL_OVERWRITE_UPDATE = 14", "CHANNEL_OVERWRITE_DELETE = 15", "MEMBER_KICK = 20", "MEMBER_PRUNE = 21", "MEMBER_BAN_ADD = 22", "MEMBER_BAN_REMOVE = 23", "MEMBER_UPDATE = 24", "MEMBER_ROLE_UPDATE = 25", "MEMBER_MOVE = 26", "MEMBER_DISCONNECT = 27", "BOT_ADD = 28", "ROLE_CREATE = 30", "ROLE_UPDATE = 31", "ROLE_DELETE = 32", "INVITE_CREATE = 40", "INVITE_UPDATE = 41", "INVITE_DELETE = 42", "WEBHOOK_CREATE = 50", "WEBHOOK_UPDATE = 51", "WEBHOOK_DELETE = 52", "EMOJI_CREATE = 60", "EMOJI_UPDATE = 61", "EMOJI_DELETE = 62", "MESSAGE_DELETE = 72", "MESSAGE_BULK_DELETE = 73", "MESSAGE_PIN = 74", "MESSAGE_UNPIN = 75", "INTEGRATION_CREATE = 80", "INTEGRATION_UPDATE = 81", "INTEGRATION_DELETE = 82" ],
+
+    "ChannelType": ["GUILD_TEXT","DM","GUILD_VOICE","GROUP_DM","GUILD_CATEGORY","GUILD_NEWS","GUILD_STORE"],
+    "ExplicitContentFilter": ["DISABLED","MEMBERS_WITHOUT_ROLES","ALL_MEMBERS"],
+    "MessageNotificationLevel": ["ALL_MESSAGES","ONLY_MENTIONS"],
+    "VerificationLevel": ["NONE","LOW","MEDIUM","HIGH","VERY_HIGH"]
+  },
+
+  "endpoints": {
+    "getGuildAuditLog": {
+      "method": "get",
+      "path": "/guilds/{guild_id}/audit-logs",
+  
+      "path_schema": { "guild_id": "string" },
+      "query_schema": {
+        "user_id": "string",
+        "action_type": "AuditLogEvent"
+      }
+    },
+
+    "getChannel": {
+      "method": "get",
+      "path": "/channels/{channel_id}",
+      "path_schema": { "channel_id": "string" }
+    },
+
+    "modifyChannel": {
+      "method": "patch",
+      "path": "/channels/{channel_id}",
+      
+      "path_schema": { "channel_id": "string" },
+      "body_schema": {
+        "name": "string",
+        "type": "ChannelType",
+        "position": { "type": "number", "nullable": true },
+        "topic": { "type": "string", "nullable": true },
+        "nsfw": { "type": "boolean", "nullable": true },
+        "rate_limit_per_user": { "type": "number", "nullable": true },
+        "bitrate": { "type": "number", "nullable": true },
+        "user_limit": { "type": "number", "nullable": true },
+        "permission_overwrites": { "type": "PermissionOverwrite[]", "nullable": true },
+        "parent_id": { "type": "string", "nullable": true }
+      }
+    },
+
+    "deleteChannel": {
+      "method": "delete",
+      "path": "/channels/{channel_id}",
+      "path_schema": { "channel_id": "string" }
+    },
+
+    "getChannelMessages": {
+      "method": "get",
+      "path": "/channels/{channel_id}/messages",
+
+      "path_schema": { "channel_id": "string" },
+      "query_schema": {
+        "around": "string",
+        "before": "string",
+        "after": "string",
+        "limit": "number"
+      }
+    },
+
+    "getChannelMessage": {
+      "method": "get",
+      "path": "/channels/{channel_id}/messages/{message_id}",
+      "path_schema": { 
+        "channel_id": "string", 
+        "message_id": "string" 
+      }
+    },
+
+    "createMessage": {
+      "method": "post",
+      "path": "/channels/{channel_id}/messages",
+      
+      "path_schema": { "channel_id": "string" },
+      "body_schema": {
+        "content": "string",
+        "nonce": { "type": "string|number", "optional": true },
+        "tts": { "type": "boolean", "default": "false" },
+        "embed": { "type": "Embed", "optional": true },
+        "allowed_mentions": {
+          "type": "{ parse?: ('roles'|'users'|'everyone')[], users?: string[], roles?: string[] }",
+          "optional": true
+        }
+      }
+    },
+
+    "createReaction": {
+      "method": "put",
+      "path": "/channels/{channel_id}/messages/{message_id}/reactions/{emoji}/@me",
+
+      "path_schema": {
+        "channel_id": "string",
+        "message_id": "string",
+        "emoji": "string"
+      }
+    },
+
+    "deleteOwnReaction": {
+      "method": "delete",
+      "path": "/channels/{channel_id}/messages/{message_id}/reactions/{emoji}/@me",
+
+      "path_schema": {
+        "channel_id": "string",
+        "message_id": "string",
+        "emoji": "string"
+      }
+    },
+
+    "deleteUserReaction": {
+      "method": "delete",
+      "path": "/channels/{channel_id}/messages/{message_id}/reactions/{emoji}/{user_id}",
+
+      "path_schema": {
+        "channel_id": "string",
+        "message_id": "string",
+        "emoji": "string",
+        "user_id": "string"
+      }
+    },
+
+    "getReactions": {
+      "method": "get",
+      "path": "/channels/{channel_id}/messages/{message_id}/reactions/{emoji}",
+
+      "path_schema": {
+        "channel_id": "string",
+        "message_id": "string",
+        "emoji": "string"
+      },
+
+      "query_schema": {
+        "before": "string",
+        "after": "string",
+        "limit": "number"
+      }
+    },
+
+    "deleteAllReactions": {
+      "method": "delete",
+      "path": "/channels/{channel_id}/messages/{message_id}/reactions",
+
+      "path_schema": {
+        "channel_id": "string",
+        "message_id": "string"
+      }
+    },
+
+    "deleteAllReactionsForEmoji": {
+      "method": "delete",
+      "path": "/channels/{channel_id}/messages/{message_id}/reactions/{emoji}",
+
+      "path_schema": {
+        "channel_id": "string",
+        "message_id": "string",
+        "emoji": "string"
+      }
+    },
+
+    "editMessage": {
+      "method": "patch",
+      "path": "/channels/{channel_id}/messages/{message_id}",
+
+      "path_schema": {
+        "channel_id": "string",
+        "message_id": "string"
+      },
+
+      "body_schema": {
+        "content": { "type": "string", "optional": true, "nullable": true },
+        "embed": { "type": "Embed", "optional": true, "nullable": true },
+        "allowed_mentions": { "type": "{ parse?: ('roles'|'users'|'everyone')[], users?: string[], roles?: string[] }", "optional": true, "nullable": true },
+        "flags": { "type": "number", "optional": true, "nullable": true }
+      }
+    },
+
+    "deleteMessage": {
+      "method": "delete",
+      "path": "/channels/{channel_id}/messages/{message_id}",
+
+      "path_schema": {
+        "channel_id": "string",
+        "message_id": "string"
+      }
+    },
+
+    "bulkDeleteMessages": {
+      "method": "post",
+      "path": "/channels/{channel_id}/messages/bulk-delete",
+      "path_schema": { "channel_id": "string" }
+    },
+
+    "editChannelPermissions": {
+      "method": "put",
+      "path": "/channels/{channel_id}/permissions/{overwrite_id}",
+
+      "path_schema": {
+        "channel_id": "string",
+        "overwrite_id": "string"
+      },
+
+      "body_schema": {
+        "allow": "number",
+        "deny": "number",
+        "type": "string"
+      }
+    },
+
+    "getChannelInvites": {
+      "method": "get",
+      "path": "/channels/{channel_id}/invites",
+      "path_schema": { "channel_id": "string" }
+    },
+
+    "createChannelInvite": {
+      "method": "post",
+      "path": "/channels/{channel_id}/invites",
+
+      "path_schema": { "channel_id": "string" },
+      "body_schema": {
+        "max_age": { "type": "number", "default": "86400" },
+        "max_uses": { "type": "number", "default": "0" },
+        "temporary": { "type": "boolean", "default": "false" },
+        "unique": { "type": "boolean", "default": "false" },
+        "target_user": { "type": "string", "optional": true },
+        "target_user_type": { "type": "number", "optional": true }
+      }
+    },
+
+    "deleteChannelPermission": {
+      "method": "delete",
+      "path": "/channels/{channel_id}/permissions/{overwrite_id}",
+
+      "path_schema": {
+        "channel_id": "string",
+        "overwrite_id": "string"
+      }
+    },
+
+    "triggerTypingIndicator": {
+      "method": "post",
+      "path": "/channels/{channel_id}/typing",
+      "path_schema": { "channel_id": "string" }
+    },
+
+    "getPinnedMessages": {
+      "method": "get",
+      "path": "/channels/{channel_id}/pins",
+      "path_schema": { "channel_id": "string" }
+    },
+
+    "addPinnedChannelMessage": {
+      "method": "put",
+      "path": "/channels/{channel_id}/pins/{message_id}",
+
+      "path_schema": { 
+        "channel_id": "string",
+        "message_id": "string" 
+      }
+    },
+
+    "deletePinnedChannelMessage": {
+      "method": "delete",
+      "path": "/channels/{channel_id}/pins/{message_id}",
+
+      "path_schema": { 
+        "channel_id": "string",
+        "message_id": "string" 
+      }
+    },
+
+    "groupDMAddRecipient": {
+      "method": "put",
+      "path": "/channels/{channel_id}/recipients/{user_id}",
+
+      "path_schema": { 
+        "channel_id": "string",
+        "user_id": "string" 
+      },
+
+      "body_schema": {
+        "access_token": "string",
+        "nick": { "type": "string", "default": "''" }
+      }
+    },
+
+    "groupDMRemoveRecipient": {
+      "method": "delete",
+      "path": "/channels/{channel_id}/recipients/{user_id}",
+
+      "path_schema": { 
+        "channel_id": "string",
+        "user_id": "string" 
+      }
+    },
+
+    "listGuildEmojis": {
+      "method": "get",
+      "path": "/guilds/{guild_id}/emojis",
+      "path_schema": { "guild_id": "string" }
+    },
+
+    "getGuildEmoji": {
+      "method": "get",
+      "path": "/guilds/{guild_id}/emojis/{emoji_id}",
+
+      "path_schema": { 
+        "guild_id": "string",
+        "emoji_id": "string"
+      }
+    },
+
+    "createGuildEmoji": {
+      "method": "post",
+      "path": "/guilds/{guild_id}/emojis",
+
+      "path_schema": { "guild_id": "string" },
+      "body_schema": {
+        "name": "string",
+        "image": "string",
+        "roles": { "type": "string[]", "default": "[]" }
+      }
+    },
+
+    "modifyGuildEmoji": {
+      "method": "patch",
+      "path": "/guilds/{guild_id}/emojis/{emoji_id}",
+
+      "path_schema": { 
+        "guild_id": "string",
+        "emoji_id": "string"
+      },
+
+      "body_schema": {
+        "name": "string",
+        "roles": { "type": "string[]", "default": "[]" }
+      }
+    },
+
+    "deleteGuildEmoji": {
+      "method": "delete",
+      "path": "/guilds/{guild_id}/emojis/{emoji_id}",
+
+      "path_schema": { 
+        "guild_id": "string",
+        "emoji_id": "string"
+      }
+    }
+  }
 } 

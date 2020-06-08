@@ -34,3 +34,5 @@ export async function makeRequest(
   if(!resp.ok) throw `HTTP Error ${resp.status}: ${resp.statusText}\n${resp.url}`
   return resp
 }
+
+export * from '../generated/endpoints.ts'
