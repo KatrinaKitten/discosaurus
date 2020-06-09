@@ -1,3 +1,7 @@
 .auth
 *.code-snippets
 *.bat
+*.sh
+
+!gencode.bat
+!gencode.sh

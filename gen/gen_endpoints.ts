@@ -1,11 +1,12 @@
-import { objectEntries } from '../src/util/functions.ts'
+import { objectEntries, localizePath } from '../src/util/functions.ts'
 
 console.log(`import { makeRequest } from '../network/api.ts'`)
 
 type ValueSchema = string|{ type: string, default?: string, optional?: boolean, nullable?: boolean }
 type ValueArg = { name: string, schema: ValueSchema, fnArg: string }
 
-const defs = JSON.parse(await Deno.readTextFile(Deno.args[0])) as {
+const inputPath = localizePath('endpoints.json', import.meta.url)
+const defs = JSON.parse(await Deno.readTextFile(inputPath)) as {
   imports: {[name: string]: string}
   enums: {[name: string]: string[]}
 
