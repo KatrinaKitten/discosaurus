@@ -359,6 +359,390 @@
         "guild_id": "string",
         "emoji_id": "string"
       }
+    },
+  
+    "createGuild": {
+      "method": "post",
+      "path": "/guilds",
+  
+      "body_schema": {
+        "name": "string",
+        "region": { "type": "string", "optional": true },
+        "icon": { "type": "string", "optional": true },
+        "verification_level": { "type": "VerificationLevel", "optional": true },
+        "default_message_notifications": { "type": "MessageNotificationLevel", "optional": true },
+        "explicit_content_filter": { "type": "ExplicitContentFilter", "optional": true },
+        "roles": { "type": "Role[]", "optional": true },
+        "channels": { "type": "Partial<Channel>[]", "optional": true },
+        "afk_channel_id": { "type": "string", "optional": true },
+        "afk_timeout": { "type": "number", "default": "300" },
+        "system_channel_id": { "type": "string", "optional": true }
+      }
+    },
+
+    "getGuild": {
+      "method": "get",
+      "path": "/guilds/{guild_id}",
+
+      "path_schema": { "guild_id": "string" },
+      "query_schema": {
+        "with_counts": { "type": "boolean", "default": "false" }
+      }
+    },
+
+    "getGuildPreview": {
+      "method": "get",
+      "path": "/guilds/{guild_id}/preview",
+      "path_schema": { "guild_id": "string" }
+    },
+
+    "modifyGuild": {
+      "method": "patch",
+      "path": "/guilds/{guild_id}",
+
+      "path_schema": { "guild_id": "string" },
+      "body_schema": {
+        "name": "string",
+        "region": { "type": "string", "nullable": true },
+        "verification_level": { "type": "VerificationLevel", "nullable": true },
+        "default_message_notifications": { "type": "MessageNotificationLevel", "nullable": true },
+        "explicit_content_filter": { "type": "ExplicitContentFilter", "nullable": true },
+        "afk_channel_id": { "type": "string", "nullable": true },
+        "afk_timeout": { "type": "number", "default": "300" },
+        "icon": { "type": "string", "nullable": true },
+        "owner_id": "string",
+        "splash": { "type": "string", "nullable": true },
+        "banner": { "type": "string", "nullable": true },
+        "system_channel_id": { "type": "string", "nullable": true },
+        "rules_channel_id": { "type": "string", "nullable": true },
+        "public_updates_channel_id": { "type": "string", "nullable": true },
+        "preferred_locale": { "type": "string", "nullable": true }
+      }
+    },
+
+    "deleteGuild": {
+      "method": "delete",
+      "path": "/guilds/{guild_id}",
+      "path_schema": { "guild_id": "string" }
+    },
+
+    "getGuildChannels": {
+      "method": "get",
+      "path": "/guilds/{guild_id}/channels",
+      "path_schema": { "guild_id": "string" }
+    },
+
+    "createGuildChannel": {
+      "method": "post",
+      "path": "/guilds/{guild_id}/channels",
+
+      "path_schema": { "guild_id": "string" },
+      "body_schema": {
+        "name": "string",
+        "type": { "type": "ChannelType", "optional": true },
+        "topic": { "type": "string", "optional": true },
+        "bitrate": { "type": "number", "optional": true },
+        "user_limit": { "type": "number", "optional": true },
+        "rate_limit_per_user": { "type": "number", "optional": true },
+        "position": { "type": "number", "optional": true },
+        "permission_overwrites": { "type": "PermissionOverwrite[]", "optional": true },
+        "parent_id": { "type": "string", "optional": true },
+        "nsfw": { "type": "boolean", "optional": true }
+      }
+    },
+
+    "getGuildMember": {
+      "method": "get",
+      "path": "/guilds/{guild_id}/members/{user_id}",
+
+      "path_schema": {
+        "guild_id": "string",
+        "user_id": "string"
+      }
+    },
+
+    "listGuildMembers": {
+      "method": "get",
+      "path": "/guilds/{guild_id}/members",
+      "path_schema": { "guild_id": "string" }
+    },
+
+    "addGuildMember": {
+      "method": "put",
+      "path": "/guilds/{guild_id}/members/{user_id}",
+
+      "path_schema": { 
+        "guild_id": "string",
+        "user_id": "string"
+      },
+
+      "body_schema": {
+        "access_token": "string",
+        "nick": { "type": "string", "optional": true },
+        "roles": { "type": "string[]", "optional": true },
+        "mute": { "type": "boolean", "optional": true },
+        "deaf": { "type": "boolean", "optional": true }
+      }
+    },
+
+    "modifyGuildMember": {
+      "method": "patch",
+      "path": "/guilds/{guild_id}/members/{user_id}",
+
+      "path_schema": { 
+        "guild_id": "string",
+        "user_id": "string"
+      },
+
+      "body_schema": {
+        "nick": { "type": "string", "optional": true, "nullable": true },
+        "roles": { "type": "string[]", "optional": true, "nullable": true },
+        "mute": { "type": "boolean", "optional": true, "nullable": true },
+        "deaf": { "type": "boolean", "optional": true, "nullable": true },
+        "channel_id": { "type": "string", "optional": true, "nullable": true }
+      }
+    },
+
+    "modifyCurrentUserNick": {
+      "method": "patch",
+      "path": "/guilds/{guild_id}/members/@me/nick",
+      
+      "path_schema": { "guild_id": "string" },
+      "body_schema": {
+        "nick": { "type": "string", "optional": true, "nullable": true }
+      }
+    },
+
+    "addGuildMemberRole": {
+      "method": "put",
+      "path": "/guilds/{guild_id}/members/{user_id}/roles/{role_id}",
+
+      "path_schema": {
+        "guild_id": "string",
+        "user_id": "string",
+        "role_id": "string"
+      }
+    },
+
+    "removeGuildMemberRole": {
+      "method": "delete",
+      "path": "/guilds/{guild_id}/members/{user_id}/roles/{role_id}",
+
+      "path_schema": {
+        "guild_id": "string",
+        "user_id": "string",
+        "role_id": "string"
+      }
+    },
+
+    "removeGuildMember": {
+      "method": "delete",
+      "path": "/guilds/{guild_id}/members/{user_id}",
+
+      "path_schema": {
+        "guild_id": "string",
+        "user_id": "string"
+      }
+    },
+
+    "getGuildBans": {
+      "method": "get",
+      "path": "/guilds/{guild_id}/bans",
+      "path_schema": { "guild_id": "string" }
+    },
+
+    "getGuildBan": {
+      "method": "get",
+      "path": "/guilds/{guild_id}/bans/{user_id}",
+
+      "path_schema": {
+        "guild_id": "string",
+        "user_id": "string"
+      }
+    },
+
+    "createGuildBan": {
+      "method": "put",
+      "path": "/guilds/{guild_id}/bans/{user_id}",
+
+      "path_schema": {
+        "guild_id": "string",
+        "user_id": "string"
+      },
+
+      "query_schema": {
+        "delete_message_days": "number",
+        "reason": "string"
+      }
+    },
+
+    "removeGuildBan": {
+      "method": "delete",
+      "path": "/guilds/{guild_id}/bans/{user_id}",
+
+      "path_schema": {
+        "guild_id": "string",
+        "user_id": "string"
+      }
+    },
+
+    "getGuildRoles": {
+      "method": "get",
+      "path": "/guilds/{guild_id}/roles",
+      "path_schema": { "guild_id": "string" }
+    },
+
+    "createGuildRole": {
+      "method": "post",
+      "path": "/guilds/{guild_id}/roles",
+
+      "path_schema": { "guild_id": "string" },
+      "body_schema": {
+        "name": { "type": "string", "optional": true },
+        "permissions": { "type": "number", "optional": true },
+        "color": { "type": "number", "optional": true },
+        "hoist": { "type": "boolean", "optional": true },
+        "mentionable": { "type": "boolean", "optional": true }
+      }
+    },
+
+    "modifyGuildRole": {
+      "method": "patch",
+      "path": "/guilds/{guild_id}/roles/{role_id}",
+
+      "path_schema": {
+        "guild_id": "string",
+        "role_id": "string"
+      },
+
+      "body_schema": {
+        "name": { "type": "string", "optional": true, "nullable": true },
+        "permissions": { "type": "number", "optional": true, "nullable": true },
+        "color": { "type": "number", "optional": true, "nullable": true },
+        "hoist": { "type": "boolean", "optional": true, "nullable": true },
+        "mentionable": { "type": "boolean", "optional": true, "nullable": true }
+      }
+    },
+
+    "deleteGuildRole": {
+      "method": "delete",
+      "path": "/guilds/{guild_id}/roles/{role_id}",
+
+      "path_schema": {
+        "guild_id": "string",
+        "role_id": "string"
+      }
+    },
+
+    "getGuildPruneCount": {
+      "method": "get",
+      "path": "/guilds/{guild_id}/prune",
+
+      "path_schema": { "guild_id": "string" },
+      "query_schema": {
+        "days": "number",
+        "include_roles": "string[]"
+      }
+    },
+
+    "beginGuildPrune": {
+      "method": "post",
+      "path": "/guilds/{guild_id}/prune",
+
+      "path_schema": { "guild_id": "string" },
+      "query_schema": {
+        "days": "number",
+        "compute_prune_count": "boolean",
+        "include_roles": "string[]"
+      }
+    },
+
+    "getGuildVoiceRegions": {
+      "method": "get",
+      "path": "/guilds/{guild_id}/regions",
+      "path_schema": { "guild_id": "string" }
+    },
+
+    "getGuildInvites": {
+      "method": "get",
+      "path": "/guilds/{guild_id}/invites",
+      "path_schema": { "guild_id": "string" }
+    },
+
+    "getGuildIntegrations": {
+      "method": "get",
+      "path": "/guilds/{guild_id}/integrations",
+      "path_schema": { "guild_id": "string" }
+    },
+
+    "createGuildIntegration": {
+      "method": "post",
+      "path": "/guilds/{guild_id}/integrations",
+
+      "path_schema": { "guild_id": "string" },
+      "body_schema": {
+        "type": "string",
+        "id": "string"
+      }
+    },
+
+    "modifyGuildIntegration": {
+      "method": "patch",
+      "path": "/guilds/{guild_id}/integrations/{integration_id}",
+      
+      "path_schema": {
+        "guild_id": "string",
+        "integration_id": "string"
+      },
+
+      "body_schema": {
+        "expire_behavior": { "type": "number", "optional": true, "nullable": true },
+        "expire_grace_period": { "type": "number", "optional": true, "nullable": true },
+        "enable_emoticons": { "type": "boolean", "optional": true, "nullable": true }
+      }
+    },
+    
+    "deleteGuildIntegration": {
+      "method": "delete",
+      "path": "/guilds/{guild_id}/integrations/{integration_id}",
+      
+      "path_schema": {
+        "guild_id": "string",
+        "integration_id": "string"
+      }
+    },
+
+    "syncGuildIntegration": {
+      "method": "post",
+      "path": "/guilds/{guild_id}/integrations/{integration_id}/sync",
+      
+      "path_schema": {
+        "guild_id": "string",
+        "integration_id": "string"
+      }
+    },
+
+    "getGuildWidget": {
+      "method": "get",
+      "path": "/guilds/{guild_id}/widget",
+      "path_schema": { "guild_id": "string" }
+    },
+
+    "modifyGuildWidget": {
+      "method": "patch",
+      "path": "/guilds/{guild_id}/widget",
+
+      "path_schema": { "guild_id": "string" },
+      "body_schema": {
+        "enabled": { "type": "boolean", "optional": true },
+        "channel_id": { "type": "string", "optional": true, "nullable": true }
+      }
+    },
+
+    "getGuildVanityURL": {
+      "method": "get",
+      "path": "/guilds/{guild_id}/vanity-url",
+      "path_schema": { "guild_id": "string" }
     }
   }
 } 

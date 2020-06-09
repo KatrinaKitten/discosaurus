@@ -45,3 +45,11 @@ export async function makeRequest(
 }
 
 export * from '../generated/endpoints.ts'
+
+export function modifyGuildChannelPositions(
+  token: string, 
+  guild_id: string,
+  positions: { id: string, position: number|null }[]
+) {
+  return makeRequest(token, 'patch', `/guilds/${guild_id}/channels`, undefined, positions)
+}

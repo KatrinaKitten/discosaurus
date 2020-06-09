@@ -457,3 +457,476 @@ export function deleteGuildEmoji(
     undefined
   )
 }
+
+export function createGuild(
+  token: string,
+  name: string,
+  region: string|undefined = undefined,
+  icon: string|undefined = undefined,
+  verification_level: VerificationLevel|undefined = undefined,
+  default_message_notifications: MessageNotificationLevel|undefined = undefined,
+  explicit_content_filter: ExplicitContentFilter|undefined = undefined,
+  roles: Role[]|undefined = undefined,
+  channels: Partial<Channel>[]|undefined = undefined,
+  afk_channel_id: string|undefined = undefined,
+  afk_timeout: number = 300,
+  system_channel_id: string|undefined = undefined
+) {
+  return makeRequest(
+    token, 'post', `/guilds`,
+    undefined,
+    {name,region,icon,verification_level,default_message_notifications,explicit_content_filter,roles,channels,afk_channel_id,afk_timeout,system_channel_id}
+  )
+}
+
+export function getGuild(
+  token: string,
+  guild_id: string,
+  with_counts: boolean = false
+) {
+  return makeRequest(
+    token, 'get', `/guilds/${guild_id}`,
+    {with_counts},
+    undefined
+  )
+}
+
+export function getGuildPreview(
+  token: string,
+  guild_id: string
+) {
+  return makeRequest(
+    token, 'get', `/guilds/${guild_id}/preview`,
+    undefined,
+    undefined
+  )
+}
+
+export function modifyGuild(
+  token: string,
+  guild_id: string,
+  name: string,
+  region: string|null = null,
+  verification_level: VerificationLevel|null = null,
+  default_message_notifications: MessageNotificationLevel|null = null,
+  explicit_content_filter: ExplicitContentFilter|null = null,
+  afk_channel_id: string|null = null,
+  afk_timeout: number = 300,
+  icon: string|null = null,
+  owner_id: string,
+  splash: string|null = null,
+  banner: string|null = null,
+  system_channel_id: string|null = null,
+  rules_channel_id: string|null = null,
+  public_updates_channel_id: string|null = null,
+  preferred_locale: string|null = null
+) {
+  return makeRequest(
+    token, 'patch', `/guilds/${guild_id}`,
+    undefined,
+    {name,region,verification_level,default_message_notifications,explicit_content_filter,afk_channel_id,afk_timeout,icon,owner_id,splash,banner,system_channel_id,rules_channel_id,public_updates_channel_id,preferred_locale}
+  )
+}
+
+export function deleteGuild(
+  token: string,
+  guild_id: string
+) {
+  return makeRequest(
+    token, 'delete', `/guilds/${guild_id}`,
+    undefined,
+    undefined
+  )
+}
+
+export function getGuildChannels(
+  token: string,
+  guild_id: string
+) {
+  return makeRequest(
+    token, 'get', `/guilds/${guild_id}/channels`,
+    undefined,
+    undefined
+  )
+}
+
+export function createGuildChannel(
+  token: string,
+  guild_id: string,
+  name: string,
+  type: ChannelType|undefined = undefined,
+  topic: string|undefined = undefined,
+  bitrate: number|undefined = undefined,
+  user_limit: number|undefined = undefined,
+  rate_limit_per_user: number|undefined = undefined,
+  position: number|undefined = undefined,
+  permission_overwrites: PermissionOverwrite[]|undefined = undefined,
+  parent_id: string|undefined = undefined,
+  nsfw: boolean|undefined = undefined
+) {
+  return makeRequest(
+    token, 'post', `/guilds/${guild_id}/channels`,
+    undefined,
+    {name,type,topic,bitrate,user_limit,rate_limit_per_user,position,permission_overwrites,parent_id,nsfw}
+  )
+}
+
+export function getGuildMember(
+  token: string,
+  guild_id: string,
+  user_id: string
+) {
+  return makeRequest(
+    token, 'get', `/guilds/${guild_id}/members/${user_id}`,
+    undefined,
+    undefined
+  )
+}
+
+export function listGuildMembers(
+  token: string,
+  guild_id: string
+) {
+  return makeRequest(
+    token, 'get', `/guilds/${guild_id}/members`,
+    undefined,
+    undefined
+  )
+}
+
+export function addGuildMember(
+  token: string,
+  guild_id: string,
+  user_id: string,
+  access_token: string,
+  nick: string|undefined = undefined,
+  roles: string[]|undefined = undefined,
+  mute: boolean|undefined = undefined,
+  deaf: boolean|undefined = undefined
+) {
+  return makeRequest(
+    token, 'put', `/guilds/${guild_id}/members/${user_id}`,
+    undefined,
+    {access_token,nick,roles,mute,deaf}
+  )
+}
+
+export function modifyGuildMember(
+  token: string,
+  guild_id: string,
+  user_id: string,
+  nick: string|undefined = undefined,
+  roles: string[]|undefined = undefined,
+  mute: boolean|undefined = undefined,
+  deaf: boolean|undefined = undefined,
+  channel_id: string|undefined = undefined
+) {
+  return makeRequest(
+    token, 'patch', `/guilds/${guild_id}/members/${user_id}`,
+    undefined,
+    {nick,roles,mute,deaf,channel_id}
+  )
+}
+
+export function modifyCurrentUserNick(
+  token: string,
+  guild_id: string,
+  nick: string|undefined = undefined
+) {
+  return makeRequest(
+    token, 'patch', `/guilds/${guild_id}/members/@me/nick`,
+    undefined,
+    {nick}
+  )
+}
+
+export function addGuildMemberRole(
+  token: string,
+  guild_id: string,
+  user_id: string,
+  role_id: string
+) {
+  return makeRequest(
+    token, 'put', `/guilds/${guild_id}/members/${user_id}/roles/${role_id}`,
+    undefined,
+    undefined
+  )
+}
+
+export function removeGuildMemberRole(
+  token: string,
+  guild_id: string,
+  user_id: string,
+  role_id: string
+) {
+  return makeRequest(
+    token, 'delete', `/guilds/${guild_id}/members/${user_id}/roles/${role_id}`,
+    undefined,
+    undefined
+  )
+}
+
+export function removeGuildMember(
+  token: string,
+  guild_id: string,
+  user_id: string
+) {
+  return makeRequest(
+    token, 'delete', `/guilds/${guild_id}/members/${user_id}`,
+    undefined,
+    undefined
+  )
+}
+
+export function getGuildBans(
+  token: string,
+  guild_id: string
+) {
+  return makeRequest(
+    token, 'get', `/guilds/${guild_id}/bans`,
+    undefined,
+    undefined
+  )
+}
+
+export function getGuildBan(
+  token: string,
+  guild_id: string,
+  user_id: string
+) {
+  return makeRequest(
+    token, 'get', `/guilds/${guild_id}/bans/${user_id}`,
+    undefined,
+    undefined
+  )
+}
+
+export function createGuildBan(
+  token: string,
+  guild_id: string,
+  user_id: string,
+  delete_message_days: number|undefined = undefined,
+  reason: string|undefined = undefined
+) {
+  return makeRequest(
+    token, 'put', `/guilds/${guild_id}/bans/${user_id}`,
+    {delete_message_days,reason},
+    undefined
+  )
+}
+
+export function removeGuildBan(
+  token: string,
+  guild_id: string,
+  user_id: string
+) {
+  return makeRequest(
+    token, 'delete', `/guilds/${guild_id}/bans/${user_id}`,
+    undefined,
+    undefined
+  )
+}
+
+export function getGuildRoles(
+  token: string,
+  guild_id: string
+) {
+  return makeRequest(
+    token, 'get', `/guilds/${guild_id}/roles`,
+    undefined,
+    undefined
+  )
+}
+
+export function createGuildRole(
+  token: string,
+  guild_id: string,
+  name: string|undefined = undefined,
+  permissions: number|undefined = undefined,
+  color: number|undefined = undefined,
+  hoist: boolean|undefined = undefined,
+  mentionable: boolean|undefined = undefined
+) {
+  return makeRequest(
+    token, 'post', `/guilds/${guild_id}/roles`,
+    undefined,
+    {name,permissions,color,hoist,mentionable}
+  )
+}
+
+export function modifyGuildRole(
+  token: string,
+  guild_id: string,
+  role_id: string,
+  name: string|undefined = undefined,
+  permissions: number|undefined = undefined,
+  color: number|undefined = undefined,
+  hoist: boolean|undefined = undefined,
+  mentionable: boolean|undefined = undefined
+) {
+  return makeRequest(
+    token, 'patch', `/guilds/${guild_id}/roles/${role_id}`,
+    undefined,
+    {name,permissions,color,hoist,mentionable}
+  )
+}
+
+export function deleteGuildRole(
+  token: string,
+  guild_id: string,
+  role_id: string
+) {
+  return makeRequest(
+    token, 'delete', `/guilds/${guild_id}/roles/${role_id}`,
+    undefined,
+    undefined
+  )
+}
+
+export function getGuildPruneCount(
+  token: string,
+  guild_id: string,
+  days: number|undefined = undefined,
+  include_roles: string[]|undefined = undefined
+) {
+  return makeRequest(
+    token, 'get', `/guilds/${guild_id}/prune`,
+    {days,include_roles},
+    undefined
+  )
+}
+
+export function beginGuildPrune(
+  token: string,
+  guild_id: string,
+  days: number|undefined = undefined,
+  compute_prune_count: boolean|undefined = undefined,
+  include_roles: string[]|undefined = undefined
+) {
+  return makeRequest(
+    token, 'post', `/guilds/${guild_id}/prune`,
+    {days,compute_prune_count,include_roles},
+    undefined
+  )
+}
+
+export function getGuildVoiceRegions(
+  token: string,
+  guild_id: string
+) {
+  return makeRequest(
+    token, 'get', `/guilds/${guild_id}/regions`,
+    undefined,
+    undefined
+  )
+}
+
+export function getGuildInvites(
+  token: string,
+  guild_id: string
+) {
+  return makeRequest(
+    token, 'get', `/guilds/${guild_id}/invites`,
+    undefined,
+    undefined
+  )
+}
+
+export function getGuildIntegrations(
+  token: string,
+  guild_id: string
+) {
+  return makeRequest(
+    token, 'get', `/guilds/${guild_id}/integrations`,
+    undefined,
+    undefined
+  )
+}
+
+export function createGuildIntegration(
+  token: string,
+  guild_id: string,
+  type: string,
+  id: string
+) {
+  return makeRequest(
+    token, 'post', `/guilds/${guild_id}/integrations`,
+    undefined,
+    {type,id}
+  )
+}
+
+export function modifyGuildIntegration(
+  token: string,
+  guild_id: string,
+  integration_id: string,
+  expire_behavior: number|undefined = undefined,
+  expire_grace_period: number|undefined = undefined,
+  enable_emoticons: boolean|undefined = undefined
+) {
+  return makeRequest(
+    token, 'patch', `/guilds/${guild_id}/integrations/${integration_id}`,
+    undefined,
+    {expire_behavior,expire_grace_period,enable_emoticons}
+  )
+}
+
+export function deleteGuildIntegration(
+  token: string,
+  guild_id: string,
+  integration_id: string
+) {
+  return makeRequest(
+    token, 'delete', `/guilds/${guild_id}/integrations/${integration_id}`,
+    undefined,
+    undefined
+  )
+}
+
+export function syncGuildIntegration(
+  token: string,
+  guild_id: string,
+  integration_id: string
+) {
+  return makeRequest(
+    token, 'post', `/guilds/${guild_id}/integrations/${integration_id}/sync`,
+    undefined,
+    undefined
+  )
+}
+
+export function getGuildWidget(
+  token: string,
+  guild_id: string
+) {
+  return makeRequest(
+    token, 'get', `/guilds/${guild_id}/widget`,
+    undefined,
+    undefined
+  )
+}
+
+export function modifyGuildWidget(
+  token: string,
+  guild_id: string,
+  enabled: boolean|undefined = undefined,
+  channel_id: string|undefined = undefined
+) {
+  return makeRequest(
+    token, 'patch', `/guilds/${guild_id}/widget`,
+    undefined,
+    {enabled,channel_id}
+  )
+}
+
+export function getGuildVanityURL(
+  token: string,
+  guild_id: string
+) {
+  return makeRequest(
+    token, 'get', `/guilds/${guild_id}/vanity-url`,
+    undefined,
+    undefined
+  )
+}
+
