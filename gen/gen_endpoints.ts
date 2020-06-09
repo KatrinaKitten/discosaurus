@@ -43,18 +43,9 @@ for(let [name, from] of objectEntries(defs.imports)) {
 }
 for(let [from, names] of objectEntries(importDefs))
   console.log(`import { ${names.join(', ')} } from '${from}'`)
+console.log()
 
-console.log('\n/// SECTION: Enums')
-for(let [name, def] of objectEntries(defs.enums)) {
-  if(def.length > 8) {
-    console.log(`export enum ${name} {\n  ${def.join(',\n  ')}\n}`)
-    console.log()
-  } else {
-    console.log(`export enum ${name} { ${def.join(', ')} }`)
-  }
-}
-
-console.log('\n/// SECTION: Endpoints')
+/// SECTION: Endpoints
 for(let [name, def] of objectEntries(defs.endpoints)) {
   let pathArgs = def.path_schema && objectEntries(def.path_schema).map(v => processValueSchema(v))
   let bodyArgs = def.body_schema && objectEntries(def.body_schema).map(v => processValueSchema(v))
