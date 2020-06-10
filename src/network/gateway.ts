@@ -40,15 +40,18 @@ export enum Intent {
 }
 
 /** External interface for an opened gateway. */
-class GatewayInterface extends Signaler {
+export class GatewayInterface extends Signaler {
+  /** Updates the client's presence information. */
   updateStatus(status: { since: number|null, game: { name: string, type: number }|null, status: string, afk: boolean }) {
     return this.emit('__gateway_updateStatus', status)
   }
 
+  /** Updates the client's voice connection information for the given guild. */
   updateVoiceState(state: { guild_id: string, channel_id: string|null, self_mute: boolean, self_deaf: boolean }) {
     return this.emit('__gateway_updateVoiceState', state)
   }
 
+  /** Requests an extended list of guild members for the given guild. */
   requestGuildMembers(request: { guild_id: string, query?: string, limit: number, presences?: boolean, user_ids?: string|string[], nonce?: string }) {
     return this.emit('__gateway_requestGuildMembers', request)
   }
