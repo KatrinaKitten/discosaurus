@@ -29,7 +29,8 @@ export async function makeRequest(
     headers: {
       'Authorization': `Bot ${token.trim()}`,
       'Content-Type': 'application/json',
-      'X-RateLimit-Precision': 'millisecond'
+      'X-RateLimit-Precision': 'millisecond',
+      'User-Agent': 'DiscordBot (discosaurus, 0.1.0)' // TODO: Pull from user bot data
     },
     body: body
   }), resp => ({
