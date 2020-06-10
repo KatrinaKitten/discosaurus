@@ -1,6 +1,6 @@
 import * as WS from "https://deno.land/std@0.55.0/ws/mod.ts"
-import { Signaler } from "../util/signals.ts";
 import { getGateway } from "../generated/endpoints.ts";
+import { GatewayInterface } from "./gateway_interface.ts";
 
 /** Opcodes which can be sent or recieved by the gateway. */
 enum Opcode {
@@ -39,22 +39,9 @@ export enum Intent {
   MESSAGE_REACTIONS        = GUILD_MESSAGE_REACTIONS | DIRECT_MESSAGE_REACTIONS
 }
 
-/** External interface for an opened gateway. */
-export class GatewayInterface extends Signaler {
-  /** Updates the client's presence information. */
-  updateStatus(status: { since: number|null, game: { name: string, type: number }|null, status: string, afk: boolean }) {
-    return this.emit('__gateway_updateStatus', status)
-  }
-
-  /** Updates the client's voice connection information for the given guild. */
-  updateVoiceState(state: { guild_id: string, channel_id: string|null, self_mute: boolean, self_deaf: boolean }) {
-    return this.emit('__gateway_updateVoiceState', state)
-  }
-
-  /** Requests an extended list of guild members for the given guild. */
-  requestGuildMembers(request: { guild_id: string, query?: string, limit: number, presences?: boolean, user_ids?: string|string[], nonce?: string }) {
-    return this.emit('__gateway_requestGuildMembers', request)
-  }
+type GatewayOptions = { 
+  gatewayVersion?: number, 
+  gwInterface?: GatewayInterface 
 }
 
 /**
@@ -64,18 +51,28 @@ export class GatewayInterface extends Signaler {
  * @param gatewayVersion The gateway version to use (default: 6)
  * @returns A `Signaler` which emits events recieved from the gateway.
  */
-export async function openGateway(token: string, intents?: number, { gatewayVersion = 6 } = {}) {
-  const gatewayUrl = (await getGateway(token).then(r => r.json())).url + `?v=${gatewayVersion}&encoding=json`,
-        dispatcher = new GatewayInterface
+export async function openGateway(token: string, intents?: number, opts: GatewayOptions = {}) {
+  const gatewayUrl = (await getGateway(token).then(r => r.json())).url + `?v=${opts.gatewayVersion ?? 6}&encoding=json`,
+        dispatcher = opts.gwInterface ?? new GatewayInterface
   
   async function gateway(resumeInfo?: { sessionId: string, seq: number|null }) {
-    const socket = await WS.connectWebSocket(gatewayUrl)
     var heartbeat = 0, acked = true,
         seq = resumeInfo?.seq ?? null, 
         sessionId = resumeInfo?.sessionId ?? ''
 
-    const send = (msg: object) => socket.send(JSON.stringify(msg))
+    const attemptReconnect = () => {
+      console.log("Disconnected, attempting to reconnect in 5 seconds...")
+      clearInterval(heartbeat)
+      setTimeout(gateway, 5000, { sessionId, seq })
+    }
+
+    const socket = await WS.connectWebSocket(gatewayUrl)
+      .catch(() => { attemptReconnect(); return undefined })
+
+    const send = (msg: object) => socket?.send(JSON.stringify(msg))
     const sendHeartbeat = () => {
+      if(!socket || socket.isClosed) 
+        return attemptReconnect()
       if(acked) { 
         send({ op: Opcode.HEARTBEAT, d: seq })
         acked = false
@@ -103,7 +100,10 @@ export async function openGateway(token: string, intents?: number, { gatewayVers
       d: request
     }))
 
-    for await(const msg of socket) {
+    dispatcher.clear('__gateway_close')
+    dispatcher.connect('__gateway_close', () => socket?.close(1000))
+
+    for await(const msg of socket||[]) {
       if(WS.isWebSocketPingEvent(msg)) continue
       if(WS.isWebSocketPongEvent(msg)) continue
       if(WS.isWebSocketCloseEvent(msg)) return console.log(msg)
@@ -142,12 +142,12 @@ export async function openGateway(token: string, intents?: number, { gatewayVers
         
         case Opcode.RECONNECT:
           if(heartbeat) clearInterval(heartbeat)
-          socket.close(1000)
+          socket?.close(1000)
           setTimeout(gateway, 0, { sessionId, seq })
           break
         case Opcode.INVALID_SESSION:
           if(heartbeat) clearInterval(heartbeat)
-          socket.close(1000)
+          socket?.close(1000)
           setTimeout(gateway, 5000, m.d && { sessionId, seq })
           break
         

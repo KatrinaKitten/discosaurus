@@ -12,7 +12,7 @@ export class Signaler {
    * @param args Any additional args to be passed along with the signal.
    */
   emit(name: string, ...args: any[]) {
-    let out = this.listeners[name]?.map(f => f(...args, name)) ?? []
+    let out = this.listeners[name]?.map(f => f(...args)) ?? []
     if(!name.startsWith('__'))
       out.concat(this.listeners['any']?.map(f => f(...args, name)) ?? [])
 
@@ -21,7 +21,7 @@ export class Signaler {
 
   /**
    * Connect a handler to a signal, to be called when the signal is emitted.
-   * The final parameter passed to `handler` will always be `name`.
+   * `any` handlers will recieve an additional parameter at the end of the list corresponding to the name of the signal.
    * Signals beginning with `__` are considered internal and will not be passed to `any` handlers.
    * 
    * @param name The name of the signal to connect to, or `any` to recieve all signals.

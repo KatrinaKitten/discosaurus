@@ -6,7 +6,7 @@ const dinos = ['🦕','🦖','🐢','🦎','🐊']
 
 client.connect('ready', event => {
   console.log(`Logged in as ${event.user.username}#${event.user.discriminator}`)
-  client.gateway?.updateStatus({ since: null, game: { name: 'with Deno', type: 0 }, status: 'online', afk: false })
+  client.updateStatus({ since: null, game: { name: 'with Deno', type: 0 }, status: 'online', afk: false })
 })
 
 client.connect('message_create', async message => {
