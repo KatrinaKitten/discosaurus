@@ -1,5 +1,50 @@
+import { ServerIntegration } from "./guilds.ts"
 
-export type User = null
+export type User = {
+  id: string
+  username: string
+  discriminator: string
+  avatar: string|null
+  bot?: boolean
+  system?: boolean
+  mfa_enabled?: boolean
+  locale?: string
+  verified?: boolean
+  email?: string|null
+  flags?: UserFlags
+  premium_type?: NitroType
+  public_flags?: UserFlags
+}
+
+export enum NitroType { NONE, NITRO_CLASSIC, NITRO }
+export enum UserFlags {
+  DISCORD_EMPLOYEE = 1 << 0,
+  DISCORD_PARTNER  = 1 << 1,
+  HYPESQUAD_EVENTS = 1 << 2,
+  BUG_HUNTER_L1    = 1 << 3,
+  HOUSE_BRAVERY    = 1 << 6,
+  HOUSE_BRILLIANCE = 1 << 7,
+  HOUSE_BALANCE    = 1 << 8,
+  EARLY_SUPPORTER  = 1 << 9,
+  TEAM_USER        = 1 << 10,
+  SYSTEM           = 1 << 12,
+  BUG_HUNTER_L2    = 1 << 14,
+  VERIFIED_BOT     = 1 << 16,
+  VERIFIED_BOT_DEV = 1 << 17
+}
+
+export enum UserConnectionVisibility { NONE, EVERYONE }
+export type UserConnection = {
+  id: string
+  name: string
+  type: string
+  revoked?: boolean
+  integrations?: ServerIntegration[]
+  verified: boolean
+  friend_sync: boolean
+  show_activity: boolean
+  visibility: UserConnectionVisibility
+}
 
 export type Presence = {
   user: User
