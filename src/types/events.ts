@@ -1,11 +1,13 @@
-import { GuildMember } from "./guilds.ts"
+import { GuildMember, Guild } from "./guilds.ts"
 import { Role } from "./roles.ts"
+import { User, Presence } from "./users.ts"
+import { Emoji } from "./messages.ts"
 
 export type ReadyEvent = {
   v: number
-  user: any // TODO: implement
+  user: User
   private_channels: []
-  guilds: any[] // TODO: implement
+  guilds: Guild[]
   session_id: string
   shard?: [number, number]
 }
@@ -18,12 +20,12 @@ export type ChannelPinsUpdateEvent = {
 
 export type GuildBanEvent = {
   guild_id: string
-  user: any // TODO: implement
+  user: User
 }
 
 export type GuildEmojisUpdateEvent = {
   guild_id: string
-  emojis: any[] // TODO: implement
+  emojis: Emoji[] 
 }
 
 export type GuildIntegrationsUpdateEvent = {
@@ -32,13 +34,13 @@ export type GuildIntegrationsUpdateEvent = {
 
 export type GuildMemberRemoveEvent = {
   guild_id: string
-  user: any // TODO: implement
+  user: User
 }
 
 export type GuildMemberUpdateEvent = {
   guild_id: string
   roles: string[]
-  user: any // TODO: implement
+  user: User
   nick?: string|null
   premium_since?: string
 }
@@ -49,7 +51,7 @@ export type GuildMembersChunkEvent = {
   chunk_index: number
   chunk_count: number
   not_found?: any[]
-  presences?: any[] // TODO: implement
+  presences?: Presence[]
   nonce?: string
 }
 
@@ -68,10 +70,10 @@ export type InviteCreateEvent = {
   code: string
   created_at: string
   guild_id?: string
-  inviter?: any // TODO: implement
+  inviter?: User
   max_age: number
   max_uses: number
-  target_user?: any // TODO: implement
+  target_user?: User
   target_user_type?: number
   temporary: boolean
   uses: number
@@ -93,4 +95,53 @@ export type MessageDeleteBulkEvent = {
   ids: string[]
   channel_id: string
   guild_id?: string
+}
+
+export type MessageReactionAddEvent = {
+  user_id: string
+  channel_id: string
+  message_id: string
+  guild_id?: string
+  member?: GuildMember
+  emoji: Emoji
+}
+
+export type MessageReactionRemoveEvent = {
+  user_id: string
+  channel_id: string
+  message_id: string
+  guild_id?: string
+  emoji: Emoji
+}
+
+export type MessageReactionRemoveAllEvent = {
+  channel_id: string
+  message_id: string
+  guild_id?: string
+}
+
+export type MessageReactionRemoveEmojiEvent = {
+  channel_id: string
+  message_id: string
+  guild_id?: string
+  emoji: Emoji
+}
+
+export type TypingStartEvent = {
+  channel_id: string
+  guild_id?: string
+  user_id: string
+  timestamp: number
+  member?: GuildMember
+}
+
+export type VoiceServerUpdateEvent = {
+  token: string
+  guild_id: string
+  endpoint: string
+}
+
+export type WebhookUpdateEvent = {
+  guild_id: string
+  channel_id: string
 }
