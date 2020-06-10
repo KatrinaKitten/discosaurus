@@ -76,7 +76,8 @@ export class RateLimiter {
       if(!limits?.wasRateLimited) {
         queued?.resolve(result)
       } else {
-        console.log(`${bucket} is being rate limited!`)
+        if(!bucket.includes('reactions')) 
+          console.log(`${bucket} is being rate limited!`)
         this.queue[bucket].push(queued!)
         queuedBucket.remaining = 0
       }
@@ -84,6 +85,11 @@ export class RateLimiter {
       // Update rate limits with information from limitBy
       queuedBucket.remaining = limits?.remaining ?? queuedBucket.remaining
       queuedBucket.resetAt = limits?.resetAt ?? queuedBucket.resetAt
+      
+      if(groupedBucket) {
+        groupedBucket.remaining = limits?.remaining ?? groupedBucket.remaining
+        groupedBucket.resetAt = limits?.resetAt ?? groupedBucket.resetAt
+      }
 
       if(limits?.globalReset)
         this.globalReset = Math.max(limits.globalReset, this.globalReset ?? 0)

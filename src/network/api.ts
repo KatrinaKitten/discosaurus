@@ -18,13 +18,14 @@ export async function makeRequest(
   token: string, 
   method: 'get'|'post'|'put'|'patch'|'delete', 
   path: string, 
+  bucket: string,
   queryData?: {[k:string]: any}, 
   bodyData?: object
 ) {
   let body = bodyData && JSON.stringify(bodyData)
   let url = apiBase+path+'?'+new URLSearchParams(objectEntries(queryData||{}).map(([k,v]) => [k,encodeURI(v.toString())])).toString()
 
-  let resp = await rateLimiter.limit(path, () => fetch(url, {
+  let resp = await rateLimiter.limit(bucket, () => fetch(url, {
     method: method.toUpperCase(),
     headers: {
       'Authorization': `Bot ${token.trim()}`,
@@ -52,5 +53,9 @@ export function modifyGuildChannelPositions(
   guild_id: string,
   positions: { id: string, position: number|null }[]
 ) {
-  return makeRequest(token, 'patch', `/guilds/${guild_id}/channels`, undefined, positions)
+  return makeRequest(
+    token, 'patch', `/guilds/${guild_id}/channels`, `/guilds/${guild_id}/channels`, 
+    undefined, 
+    positions
+  )
 }

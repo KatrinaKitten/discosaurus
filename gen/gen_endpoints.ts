@@ -64,7 +64,7 @@ for(let [name, def] of objectEntries(defs.endpoints)) {
       token: string${pathFnArgs}${queryFnArgs}${bodyFnArgs}
     ) {
       return makeRequest(
-        token, '${def.method}', \`${def.path.replace(/\{/g,'${')}\`,
+        token, '${def.method}', \`${def.path.replace(/\{/g,'${')}\`, \`${def.path.replace(/\{/,'${')}\`,
         ${queryArgNames.length ? '{'+queryArgNames.join(',')+'}' : 'undefined'},
         ${bodyArgNames.length ? '{'+bodyArgNames.join(',')+'}' : 'undefined'}
       )

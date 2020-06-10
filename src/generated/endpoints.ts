@@ -10,7 +10,7 @@ export function getGateway(
   token: string
 ) {
   return makeRequest(
-    token, 'get', `/gateway`,
+    token, 'get', `/gateway`, `/gateway`,
     undefined,
     undefined
   )
@@ -20,7 +20,7 @@ export function getGatewayBot(
   token: string
 ) {
   return makeRequest(
-    token, 'get', `/gateway/bot`,
+    token, 'get', `/gateway/bot`, `/gateway/bot`,
     undefined,
     undefined
   )
@@ -33,7 +33,7 @@ export function getGuildAuditLog(
   action_type: AuditLogEvent|undefined = undefined
 ) {
   return makeRequest(
-    token, 'get', `/guilds/${guild_id}/audit-logs`,
+    token, 'get', `/guilds/${guild_id}/audit-logs`, `/guilds/${guild_id}/audit-logs`,
     {user_id,action_type},
     undefined
   )
@@ -44,7 +44,7 @@ export function getChannel(
   channel_id: string
 ) {
   return makeRequest(
-    token, 'get', `/channels/${channel_id}`,
+    token, 'get', `/channels/${channel_id}`, `/channels/${channel_id}`,
     undefined,
     undefined
   )
@@ -65,7 +65,7 @@ export function modifyChannel(
   parent_id: string|null = null
 ) {
   return makeRequest(
-    token, 'patch', `/channels/${channel_id}`,
+    token, 'patch', `/channels/${channel_id}`, `/channels/${channel_id}`,
     undefined,
     {name,type,position,topic,nsfw,rate_limit_per_user,bitrate,user_limit,permission_overwrites,parent_id}
   )
@@ -76,7 +76,7 @@ export function deleteChannel(
   channel_id: string
 ) {
   return makeRequest(
-    token, 'delete', `/channels/${channel_id}`,
+    token, 'delete', `/channels/${channel_id}`, `/channels/${channel_id}`,
     undefined,
     undefined
   )
@@ -91,7 +91,7 @@ export function getChannelMessages(
   limit: number|undefined = undefined
 ) {
   return makeRequest(
-    token, 'get', `/channels/${channel_id}/messages`,
+    token, 'get', `/channels/${channel_id}/messages`, `/channels/${channel_id}/messages`,
     {around,before,after,limit},
     undefined
   )
@@ -103,7 +103,7 @@ export function getChannelMessage(
   message_id: string
 ) {
   return makeRequest(
-    token, 'get', `/channels/${channel_id}/messages/${message_id}`,
+    token, 'get', `/channels/${channel_id}/messages/${message_id}`, `/channels/${channel_id}/messages/{message_id}`,
     undefined,
     undefined
   )
@@ -119,7 +119,7 @@ export function createMessage(
   allowed_mentions: { parse?: ('roles'|'users'|'everyone')[], users?: string[], roles?: string[] }|undefined = undefined
 ) {
   return makeRequest(
-    token, 'post', `/channels/${channel_id}/messages`,
+    token, 'post', `/channels/${channel_id}/messages`, `/channels/${channel_id}/messages`,
     undefined,
     {content,nonce,tts,embed,allowed_mentions}
   )
@@ -132,7 +132,7 @@ export function createReaction(
   emoji: string
 ) {
   return makeRequest(
-    token, 'put', `/channels/${channel_id}/messages/${message_id}/reactions/${emoji}/@me`,
+    token, 'put', `/channels/${channel_id}/messages/${message_id}/reactions/${emoji}/@me`, `/channels/${channel_id}/messages/{message_id}/reactions/{emoji}/@me`,
     undefined,
     undefined
   )
@@ -145,7 +145,7 @@ export function deleteOwnReaction(
   emoji: string
 ) {
   return makeRequest(
-    token, 'delete', `/channels/${channel_id}/messages/${message_id}/reactions/${emoji}/@me`,
+    token, 'delete', `/channels/${channel_id}/messages/${message_id}/reactions/${emoji}/@me`, `/channels/${channel_id}/messages/{message_id}/reactions/{emoji}/@me`,
     undefined,
     undefined
   )
@@ -159,7 +159,7 @@ export function deleteUserReaction(
   user_id: string
 ) {
   return makeRequest(
-    token, 'delete', `/channels/${channel_id}/messages/${message_id}/reactions/${emoji}/${user_id}`,
+    token, 'delete', `/channels/${channel_id}/messages/${message_id}/reactions/${emoji}/${user_id}`, `/channels/${channel_id}/messages/{message_id}/reactions/{emoji}/{user_id}`,
     undefined,
     undefined
   )
@@ -175,7 +175,7 @@ export function getReactions(
   limit: number|undefined = undefined
 ) {
   return makeRequest(
-    token, 'get', `/channels/${channel_id}/messages/${message_id}/reactions/${emoji}`,
+    token, 'get', `/channels/${channel_id}/messages/${message_id}/reactions/${emoji}`, `/channels/${channel_id}/messages/{message_id}/reactions/{emoji}`,
     {before,after,limit},
     undefined
   )
@@ -187,7 +187,7 @@ export function deleteAllReactions(
   message_id: string
 ) {
   return makeRequest(
-    token, 'delete', `/channels/${channel_id}/messages/${message_id}/reactions`,
+    token, 'delete', `/channels/${channel_id}/messages/${message_id}/reactions`, `/channels/${channel_id}/messages/{message_id}/reactions`,
     undefined,
     undefined
   )
@@ -200,7 +200,7 @@ export function deleteAllReactionsForEmoji(
   emoji: string
 ) {
   return makeRequest(
-    token, 'delete', `/channels/${channel_id}/messages/${message_id}/reactions/${emoji}`,
+    token, 'delete', `/channels/${channel_id}/messages/${message_id}/reactions/${emoji}`, `/channels/${channel_id}/messages/{message_id}/reactions/{emoji}`,
     undefined,
     undefined
   )
@@ -216,7 +216,7 @@ export function editMessage(
   flags: number|undefined = undefined
 ) {
   return makeRequest(
-    token, 'patch', `/channels/${channel_id}/messages/${message_id}`,
+    token, 'patch', `/channels/${channel_id}/messages/${message_id}`, `/channels/${channel_id}/messages/{message_id}`,
     undefined,
     {content,embed,allowed_mentions,flags}
   )
@@ -228,7 +228,7 @@ export function deleteMessage(
   message_id: string
 ) {
   return makeRequest(
-    token, 'delete', `/channels/${channel_id}/messages/${message_id}`,
+    token, 'delete', `/channels/${channel_id}/messages/${message_id}`, `/channels/${channel_id}/messages/{message_id}`,
     undefined,
     undefined
   )
@@ -239,7 +239,7 @@ export function bulkDeleteMessages(
   channel_id: string
 ) {
   return makeRequest(
-    token, 'post', `/channels/${channel_id}/messages/bulk-delete`,
+    token, 'post', `/channels/${channel_id}/messages/bulk-delete`, `/channels/${channel_id}/messages/bulk-delete`,
     undefined,
     undefined
   )
@@ -254,7 +254,7 @@ export function editChannelPermissions(
   type: string
 ) {
   return makeRequest(
-    token, 'put', `/channels/${channel_id}/permissions/${overwrite_id}`,
+    token, 'put', `/channels/${channel_id}/permissions/${overwrite_id}`, `/channels/${channel_id}/permissions/{overwrite_id}`,
     undefined,
     {allow,deny,type}
   )
@@ -265,7 +265,7 @@ export function getChannelInvites(
   channel_id: string
 ) {
   return makeRequest(
-    token, 'get', `/channels/${channel_id}/invites`,
+    token, 'get', `/channels/${channel_id}/invites`, `/channels/${channel_id}/invites`,
     undefined,
     undefined
   )
@@ -282,7 +282,7 @@ export function createChannelInvite(
   target_user_type: number|undefined = undefined
 ) {
   return makeRequest(
-    token, 'post', `/channels/${channel_id}/invites`,
+    token, 'post', `/channels/${channel_id}/invites`, `/channels/${channel_id}/invites`,
     undefined,
     {max_age,max_uses,temporary,unique,target_user,target_user_type}
   )
@@ -294,7 +294,7 @@ export function deleteChannelPermission(
   overwrite_id: string
 ) {
   return makeRequest(
-    token, 'delete', `/channels/${channel_id}/permissions/${overwrite_id}`,
+    token, 'delete', `/channels/${channel_id}/permissions/${overwrite_id}`, `/channels/${channel_id}/permissions/{overwrite_id}`,
     undefined,
     undefined
   )
@@ -305,7 +305,7 @@ export function triggerTypingIndicator(
   channel_id: string
 ) {
   return makeRequest(
-    token, 'post', `/channels/${channel_id}/typing`,
+    token, 'post', `/channels/${channel_id}/typing`, `/channels/${channel_id}/typing`,
     undefined,
     undefined
   )
@@ -316,7 +316,7 @@ export function getPinnedMessages(
   channel_id: string
 ) {
   return makeRequest(
-    token, 'get', `/channels/${channel_id}/pins`,
+    token, 'get', `/channels/${channel_id}/pins`, `/channels/${channel_id}/pins`,
     undefined,
     undefined
   )
@@ -328,7 +328,7 @@ export function addPinnedChannelMessage(
   message_id: string
 ) {
   return makeRequest(
-    token, 'put', `/channels/${channel_id}/pins/${message_id}`,
+    token, 'put', `/channels/${channel_id}/pins/${message_id}`, `/channels/${channel_id}/pins/{message_id}`,
     undefined,
     undefined
   )
@@ -340,7 +340,7 @@ export function deletePinnedChannelMessage(
   message_id: string
 ) {
   return makeRequest(
-    token, 'delete', `/channels/${channel_id}/pins/${message_id}`,
+    token, 'delete', `/channels/${channel_id}/pins/${message_id}`, `/channels/${channel_id}/pins/{message_id}`,
     undefined,
     undefined
   )
@@ -354,7 +354,7 @@ export function groupDMAddRecipient(
   nick: string = ''
 ) {
   return makeRequest(
-    token, 'put', `/channels/${channel_id}/recipients/${user_id}`,
+    token, 'put', `/channels/${channel_id}/recipients/${user_id}`, `/channels/${channel_id}/recipients/{user_id}`,
     undefined,
     {access_token,nick}
   )
@@ -366,7 +366,7 @@ export function groupDMRemoveRecipient(
   user_id: string
 ) {
   return makeRequest(
-    token, 'delete', `/channels/${channel_id}/recipients/${user_id}`,
+    token, 'delete', `/channels/${channel_id}/recipients/${user_id}`, `/channels/${channel_id}/recipients/{user_id}`,
     undefined,
     undefined
   )
@@ -377,7 +377,7 @@ export function listGuildEmojis(
   guild_id: string
 ) {
   return makeRequest(
-    token, 'get', `/guilds/${guild_id}/emojis`,
+    token, 'get', `/guilds/${guild_id}/emojis`, `/guilds/${guild_id}/emojis`,
     undefined,
     undefined
   )
@@ -389,7 +389,7 @@ export function getGuildEmoji(
   emoji_id: string
 ) {
   return makeRequest(
-    token, 'get', `/guilds/${guild_id}/emojis/${emoji_id}`,
+    token, 'get', `/guilds/${guild_id}/emojis/${emoji_id}`, `/guilds/${guild_id}/emojis/{emoji_id}`,
     undefined,
     undefined
   )
@@ -403,7 +403,7 @@ export function createGuildEmoji(
   roles: string[] = []
 ) {
   return makeRequest(
-    token, 'post', `/guilds/${guild_id}/emojis`,
+    token, 'post', `/guilds/${guild_id}/emojis`, `/guilds/${guild_id}/emojis`,
     undefined,
     {name,image,roles}
   )
@@ -417,7 +417,7 @@ export function modifyGuildEmoji(
   roles: string[] = []
 ) {
   return makeRequest(
-    token, 'patch', `/guilds/${guild_id}/emojis/${emoji_id}`,
+    token, 'patch', `/guilds/${guild_id}/emojis/${emoji_id}`, `/guilds/${guild_id}/emojis/{emoji_id}`,
     undefined,
     {name,roles}
   )
@@ -429,7 +429,7 @@ export function deleteGuildEmoji(
   emoji_id: string
 ) {
   return makeRequest(
-    token, 'delete', `/guilds/${guild_id}/emojis/${emoji_id}`,
+    token, 'delete', `/guilds/${guild_id}/emojis/${emoji_id}`, `/guilds/${guild_id}/emojis/{emoji_id}`,
     undefined,
     undefined
   )
@@ -450,7 +450,7 @@ export function createGuild(
   system_channel_id: string|undefined = undefined
 ) {
   return makeRequest(
-    token, 'post', `/guilds`,
+    token, 'post', `/guilds`, `/guilds`,
     undefined,
     {name,region,icon,verification_level,default_message_notifications,explicit_content_filter,roles,channels,afk_channel_id,afk_timeout,system_channel_id}
   )
@@ -462,7 +462,7 @@ export function getGuild(
   with_counts: boolean = false
 ) {
   return makeRequest(
-    token, 'get', `/guilds/${guild_id}`,
+    token, 'get', `/guilds/${guild_id}`, `/guilds/${guild_id}`,
     {with_counts},
     undefined
   )
@@ -473,7 +473,7 @@ export function getGuildPreview(
   guild_id: string
 ) {
   return makeRequest(
-    token, 'get', `/guilds/${guild_id}/preview`,
+    token, 'get', `/guilds/${guild_id}/preview`, `/guilds/${guild_id}/preview`,
     undefined,
     undefined
   )
@@ -499,7 +499,7 @@ export function modifyGuild(
   preferred_locale: string|null = null
 ) {
   return makeRequest(
-    token, 'patch', `/guilds/${guild_id}`,
+    token, 'patch', `/guilds/${guild_id}`, `/guilds/${guild_id}`,
     undefined,
     {name,region,verification_level,default_message_notifications,explicit_content_filter,afk_channel_id,afk_timeout,icon,owner_id,splash,banner,system_channel_id,rules_channel_id,public_updates_channel_id,preferred_locale}
   )
@@ -510,7 +510,7 @@ export function deleteGuild(
   guild_id: string
 ) {
   return makeRequest(
-    token, 'delete', `/guilds/${guild_id}`,
+    token, 'delete', `/guilds/${guild_id}`, `/guilds/${guild_id}`,
     undefined,
     undefined
   )
@@ -521,7 +521,7 @@ export function getGuildChannels(
   guild_id: string
 ) {
   return makeRequest(
-    token, 'get', `/guilds/${guild_id}/channels`,
+    token, 'get', `/guilds/${guild_id}/channels`, `/guilds/${guild_id}/channels`,
     undefined,
     undefined
   )
@@ -542,7 +542,7 @@ export function createGuildChannel(
   nsfw: boolean|undefined = undefined
 ) {
   return makeRequest(
-    token, 'post', `/guilds/${guild_id}/channels`,
+    token, 'post', `/guilds/${guild_id}/channels`, `/guilds/${guild_id}/channels`,
     undefined,
     {name,type,topic,bitrate,user_limit,rate_limit_per_user,position,permission_overwrites,parent_id,nsfw}
   )
@@ -554,7 +554,7 @@ export function getGuildMember(
   user_id: string
 ) {
   return makeRequest(
-    token, 'get', `/guilds/${guild_id}/members/${user_id}`,
+    token, 'get', `/guilds/${guild_id}/members/${user_id}`, `/guilds/${guild_id}/members/{user_id}`,
     undefined,
     undefined
   )
@@ -565,7 +565,7 @@ export function listGuildMembers(
   guild_id: string
 ) {
   return makeRequest(
-    token, 'get', `/guilds/${guild_id}/members`,
+    token, 'get', `/guilds/${guild_id}/members`, `/guilds/${guild_id}/members`,
     undefined,
     undefined
   )
@@ -582,7 +582,7 @@ export function addGuildMember(
   deaf: boolean|undefined = undefined
 ) {
   return makeRequest(
-    token, 'put', `/guilds/${guild_id}/members/${user_id}`,
+    token, 'put', `/guilds/${guild_id}/members/${user_id}`, `/guilds/${guild_id}/members/{user_id}`,
     undefined,
     {access_token,nick,roles,mute,deaf}
   )
@@ -599,7 +599,7 @@ export function modifyGuildMember(
   channel_id: string|undefined = undefined
 ) {
   return makeRequest(
-    token, 'patch', `/guilds/${guild_id}/members/${user_id}`,
+    token, 'patch', `/guilds/${guild_id}/members/${user_id}`, `/guilds/${guild_id}/members/{user_id}`,
     undefined,
     {nick,roles,mute,deaf,channel_id}
   )
@@ -611,7 +611,7 @@ export function modifyCurrentUserNick(
   nick: string|undefined = undefined
 ) {
   return makeRequest(
-    token, 'patch', `/guilds/${guild_id}/members/@me/nick`,
+    token, 'patch', `/guilds/${guild_id}/members/@me/nick`, `/guilds/${guild_id}/members/@me/nick`,
     undefined,
     {nick}
   )
@@ -624,7 +624,7 @@ export function addGuildMemberRole(
   role_id: string
 ) {
   return makeRequest(
-    token, 'put', `/guilds/${guild_id}/members/${user_id}/roles/${role_id}`,
+    token, 'put', `/guilds/${guild_id}/members/${user_id}/roles/${role_id}`, `/guilds/${guild_id}/members/{user_id}/roles/{role_id}`,
     undefined,
     undefined
   )
@@ -637,7 +637,7 @@ export function removeGuildMemberRole(
   role_id: string
 ) {
   return makeRequest(
-    token, 'delete', `/guilds/${guild_id}/members/${user_id}/roles/${role_id}`,
+    token, 'delete', `/guilds/${guild_id}/members/${user_id}/roles/${role_id}`, `/guilds/${guild_id}/members/{user_id}/roles/{role_id}`,
     undefined,
     undefined
   )
@@ -649,7 +649,7 @@ export function removeGuildMember(
   user_id: string
 ) {
   return makeRequest(
-    token, 'delete', `/guilds/${guild_id}/members/${user_id}`,
+    token, 'delete', `/guilds/${guild_id}/members/${user_id}`, `/guilds/${guild_id}/members/{user_id}`,
     undefined,
     undefined
   )
@@ -660,7 +660,7 @@ export function getGuildBans(
   guild_id: string
 ) {
   return makeRequest(
-    token, 'get', `/guilds/${guild_id}/bans`,
+    token, 'get', `/guilds/${guild_id}/bans`, `/guilds/${guild_id}/bans`,
     undefined,
     undefined
   )
@@ -672,7 +672,7 @@ export function getGuildBan(
   user_id: string
 ) {
   return makeRequest(
-    token, 'get', `/guilds/${guild_id}/bans/${user_id}`,
+    token, 'get', `/guilds/${guild_id}/bans/${user_id}`, `/guilds/${guild_id}/bans/{user_id}`,
     undefined,
     undefined
   )
@@ -686,7 +686,7 @@ export function createGuildBan(
   reason: string|undefined = undefined
 ) {
   return makeRequest(
-    token, 'put', `/guilds/${guild_id}/bans/${user_id}`,
+    token, 'put', `/guilds/${guild_id}/bans/${user_id}`, `/guilds/${guild_id}/bans/{user_id}`,
     {delete_message_days,reason},
     undefined
   )
@@ -698,7 +698,7 @@ export function removeGuildBan(
   user_id: string
 ) {
   return makeRequest(
-    token, 'delete', `/guilds/${guild_id}/bans/${user_id}`,
+    token, 'delete', `/guilds/${guild_id}/bans/${user_id}`, `/guilds/${guild_id}/bans/{user_id}`,
     undefined,
     undefined
   )
@@ -709,7 +709,7 @@ export function getGuildRoles(
   guild_id: string
 ) {
   return makeRequest(
-    token, 'get', `/guilds/${guild_id}/roles`,
+    token, 'get', `/guilds/${guild_id}/roles`, `/guilds/${guild_id}/roles`,
     undefined,
     undefined
   )
@@ -725,7 +725,7 @@ export function createGuildRole(
   mentionable: boolean|undefined = undefined
 ) {
   return makeRequest(
-    token, 'post', `/guilds/${guild_id}/roles`,
+    token, 'post', `/guilds/${guild_id}/roles`, `/guilds/${guild_id}/roles`,
     undefined,
     {name,permissions,color,hoist,mentionable}
   )
@@ -742,7 +742,7 @@ export function modifyGuildRole(
   mentionable: boolean|undefined = undefined
 ) {
   return makeRequest(
-    token, 'patch', `/guilds/${guild_id}/roles/${role_id}`,
+    token, 'patch', `/guilds/${guild_id}/roles/${role_id}`, `/guilds/${guild_id}/roles/{role_id}`,
     undefined,
     {name,permissions,color,hoist,mentionable}
   )
@@ -754,7 +754,7 @@ export function deleteGuildRole(
   role_id: string
 ) {
   return makeRequest(
-    token, 'delete', `/guilds/${guild_id}/roles/${role_id}`,
+    token, 'delete', `/guilds/${guild_id}/roles/${role_id}`, `/guilds/${guild_id}/roles/{role_id}`,
     undefined,
     undefined
   )
@@ -767,7 +767,7 @@ export function getGuildPruneCount(
   include_roles: string[]|undefined = undefined
 ) {
   return makeRequest(
-    token, 'get', `/guilds/${guild_id}/prune`,
+    token, 'get', `/guilds/${guild_id}/prune`, `/guilds/${guild_id}/prune`,
     {days,include_roles},
     undefined
   )
@@ -781,7 +781,7 @@ export function beginGuildPrune(
   include_roles: string[]|undefined = undefined
 ) {
   return makeRequest(
-    token, 'post', `/guilds/${guild_id}/prune`,
+    token, 'post', `/guilds/${guild_id}/prune`, `/guilds/${guild_id}/prune`,
     {days,compute_prune_count,include_roles},
     undefined
   )
@@ -792,7 +792,7 @@ export function getGuildVoiceRegions(
   guild_id: string
 ) {
   return makeRequest(
-    token, 'get', `/guilds/${guild_id}/regions`,
+    token, 'get', `/guilds/${guild_id}/regions`, `/guilds/${guild_id}/regions`,
     undefined,
     undefined
   )
@@ -803,7 +803,7 @@ export function getGuildInvites(
   guild_id: string
 ) {
   return makeRequest(
-    token, 'get', `/guilds/${guild_id}/invites`,
+    token, 'get', `/guilds/${guild_id}/invites`, `/guilds/${guild_id}/invites`,
     undefined,
     undefined
   )
@@ -814,7 +814,7 @@ export function getGuildIntegrations(
   guild_id: string
 ) {
   return makeRequest(
-    token, 'get', `/guilds/${guild_id}/integrations`,
+    token, 'get', `/guilds/${guild_id}/integrations`, `/guilds/${guild_id}/integrations`,
     undefined,
     undefined
   )
@@ -827,7 +827,7 @@ export function createGuildIntegration(
   id: string
 ) {
   return makeRequest(
-    token, 'post', `/guilds/${guild_id}/integrations`,
+    token, 'post', `/guilds/${guild_id}/integrations`, `/guilds/${guild_id}/integrations`,
     undefined,
     {type,id}
   )
@@ -842,7 +842,7 @@ export function modifyGuildIntegration(
   enable_emoticons: boolean|undefined = undefined
 ) {
   return makeRequest(
-    token, 'patch', `/guilds/${guild_id}/integrations/${integration_id}`,
+    token, 'patch', `/guilds/${guild_id}/integrations/${integration_id}`, `/guilds/${guild_id}/integrations/{integration_id}`,
     undefined,
     {expire_behavior,expire_grace_period,enable_emoticons}
   )
@@ -854,7 +854,7 @@ export function deleteGuildIntegration(
   integration_id: string
 ) {
   return makeRequest(
-    token, 'delete', `/guilds/${guild_id}/integrations/${integration_id}`,
+    token, 'delete', `/guilds/${guild_id}/integrations/${integration_id}`, `/guilds/${guild_id}/integrations/{integration_id}`,
     undefined,
     undefined
   )
@@ -866,7 +866,7 @@ export function syncGuildIntegration(
   integration_id: string
 ) {
   return makeRequest(
-    token, 'post', `/guilds/${guild_id}/integrations/${integration_id}/sync`,
+    token, 'post', `/guilds/${guild_id}/integrations/${integration_id}/sync`, `/guilds/${guild_id}/integrations/{integration_id}/sync`,
     undefined,
     undefined
   )
@@ -877,7 +877,7 @@ export function getGuildWidget(
   guild_id: string
 ) {
   return makeRequest(
-    token, 'get', `/guilds/${guild_id}/widget`,
+    token, 'get', `/guilds/${guild_id}/widget`, `/guilds/${guild_id}/widget`,
     undefined,
     undefined
   )
@@ -890,7 +890,7 @@ export function modifyGuildWidget(
   channel_id: string|undefined = undefined
 ) {
   return makeRequest(
-    token, 'patch', `/guilds/${guild_id}/widget`,
+    token, 'patch', `/guilds/${guild_id}/widget`, `/guilds/${guild_id}/widget`,
     undefined,
     {enabled,channel_id}
   )
@@ -901,7 +901,7 @@ export function getGuildVanityURL(
   guild_id: string
 ) {
   return makeRequest(
-    token, 'get', `/guilds/${guild_id}/vanity-url`,
+    token, 'get', `/guilds/${guild_id}/vanity-url`, `/guilds/${guild_id}/vanity-url`,
     undefined,
     undefined
   )
@@ -913,7 +913,7 @@ export function getInvite(
   with_counts: boolean|undefined = undefined
 ) {
   return makeRequest(
-    token, 'get', `/invites/${invite_code}`,
+    token, 'get', `/invites/${invite_code}`, `/invites/${invite_code}`,
     {with_counts},
     undefined
   )
@@ -924,7 +924,7 @@ export function deleteInvite(
   invite_code: string
 ) {
   return makeRequest(
-    token, 'delete', `/invites/${invite_code}`,
+    token, 'delete', `/invites/${invite_code}`, `/invites/${invite_code}`,
     undefined,
     undefined
   )
@@ -934,7 +934,7 @@ export function getCurrentUser(
   token: string
 ) {
   return makeRequest(
-    token, 'get', `/users/@me`,
+    token, 'get', `/users/@me`, `/users/@me`,
     undefined,
     undefined
   )
@@ -945,7 +945,7 @@ export function getUser(
   user_id: string
 ) {
   return makeRequest(
-    token, 'get', `/users/${user_id}`,
+    token, 'get', `/users/${user_id}`, `/users/${user_id}`,
     undefined,
     undefined
   )
@@ -957,7 +957,7 @@ export function modifyCurrentUser(
   avatar: string|undefined = undefined
 ) {
   return makeRequest(
-    token, 'patch', `/users/@me`,
+    token, 'patch', `/users/@me`, `/users/@me`,
     undefined,
     {username,avatar}
   )
@@ -970,7 +970,7 @@ export function getCurrentUserGuilds(
   limit: number|undefined = undefined
 ) {
   return makeRequest(
-    token, 'get', `/users/@me/guilds`,
+    token, 'get', `/users/@me/guilds`, `/users/@me/guilds`,
     {before,after,limit},
     undefined
   )
@@ -981,7 +981,7 @@ export function leaveGuild(
   guild_id: string
 ) {
   return makeRequest(
-    token, 'delete', `/users/@me/guilds/${guild_id}`,
+    token, 'delete', `/users/@me/guilds/${guild_id}`, `/users/@me/guilds/${guild_id}`,
     undefined,
     undefined
   )
@@ -992,7 +992,7 @@ export function createDM(
   recipient_id: string
 ) {
   return makeRequest(
-    token, 'post', `/users/@me/channels`,
+    token, 'post', `/users/@me/channels`, `/users/@me/channels`,
     undefined,
     {recipient_id}
   )
@@ -1002,7 +1002,7 @@ export function getUserConnections(
   token: string
 ) {
   return makeRequest(
-    token, 'get', `/users/@me/connections`,
+    token, 'get', `/users/@me/connections`, `/users/@me/connections`,
     undefined,
     undefined
   )
@@ -1012,7 +1012,7 @@ export function getVoiceRegions(
   token: string
 ) {
   return makeRequest(
-    token, 'get', `/voice/regions`,
+    token, 'get', `/voice/regions`, `/voice/regions`,
     undefined,
     undefined
   )
@@ -1025,7 +1025,7 @@ export function createWebhook(
   avatar: string|null = null
 ) {
   return makeRequest(
-    token, 'post', `/channels/${channel_id}/webhooks`,
+    token, 'post', `/channels/${channel_id}/webhooks`, `/channels/${channel_id}/webhooks`,
     undefined,
     {name,avatar}
   )
@@ -1036,7 +1036,7 @@ export function getChannelWebhooks(
   channel_id: string
 ) {
   return makeRequest(
-    token, 'get', `/channels/${channel_id}/webhooks`,
+    token, 'get', `/channels/${channel_id}/webhooks`, `/channels/${channel_id}/webhooks`,
     undefined,
     undefined
   )
@@ -1047,7 +1047,7 @@ export function getGuildWebhooks(
   guild_id: string
 ) {
   return makeRequest(
-    token, 'get', `/guilds/${guild_id}/webhooks`,
+    token, 'get', `/guilds/${guild_id}/webhooks`, `/guilds/${guild_id}/webhooks`,
     undefined,
     undefined
   )
@@ -1058,7 +1058,7 @@ export function getWebhook(
   webhook_id: string
 ) {
   return makeRequest(
-    token, 'get', `/webhooks/${webhook_id}`,
+    token, 'get', `/webhooks/${webhook_id}`, `/webhooks/${webhook_id}`,
     undefined,
     undefined
   )
@@ -1070,7 +1070,7 @@ export function getWebhookWithToken(
   webhook_token: string
 ) {
   return makeRequest(
-    token, 'get', `/webhooks/${webhook_id}/${webhook_token}`,
+    token, 'get', `/webhooks/${webhook_id}/${webhook_token}`, `/webhooks/${webhook_id}/{webhook_token}`,
     undefined,
     undefined
   )
@@ -1084,7 +1084,7 @@ export function modifyWebhook(
   channel_id: string|undefined = undefined
 ) {
   return makeRequest(
-    token, 'patch', `/webhooks/${webhook_id}`,
+    token, 'patch', `/webhooks/${webhook_id}`, `/webhooks/${webhook_id}`,
     undefined,
     {name,avatar,channel_id}
   )
@@ -1099,7 +1099,7 @@ export function modifyWebhookWithToken(
   channel_id: string|undefined = undefined
 ) {
   return makeRequest(
-    token, 'patch', `/webhooks/${webhook_id}/${webhook_token}`,
+    token, 'patch', `/webhooks/${webhook_id}/${webhook_token}`, `/webhooks/${webhook_id}/{webhook_token}`,
     undefined,
     {name,avatar,channel_id}
   )
@@ -1110,7 +1110,7 @@ export function deleteWebhook(
   webhook_id: string
 ) {
   return makeRequest(
-    token, 'delete', `/webhooks/${webhook_id}`,
+    token, 'delete', `/webhooks/${webhook_id}`, `/webhooks/${webhook_id}`,
     undefined,
     undefined
   )
@@ -1122,7 +1122,7 @@ export function deleteWebhookWithToken(
   webhook_token: string
 ) {
   return makeRequest(
-    token, 'delete', `/webhooks/${webhook_id}/${webhook_token}`,
+    token, 'delete', `/webhooks/${webhook_id}/${webhook_token}`, `/webhooks/${webhook_id}/{webhook_token}`,
     undefined,
     undefined
   )
@@ -1142,7 +1142,7 @@ export function executeWebhook(
   allowed_mentions: { parse?: ('roles'|'users'|'everyone')[], users?: string[], roles?: string[] }|undefined = undefined
 ) {
   return makeRequest(
-    token, 'post', `/webhooks/${webhook_id}/${webhook_token}`,
+    token, 'post', `/webhooks/${webhook_id}/${webhook_token}`, `/webhooks/${webhook_id}/{webhook_token}`,
     {wait},
     {content,username,avatar_url,tts,file,embeds,allowed_mentions}
   )
