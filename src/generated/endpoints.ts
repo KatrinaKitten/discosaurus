@@ -6,6 +6,26 @@ import { ExplicitContentFilter, MessageNotificationLevel, VerificationLevel } fr
 import { PermissionOverwrite } from '../types/permissions.ts'
 import { Role } from '../types/roles.ts'
 
+export function getGateway(
+  token: string
+) {
+  return makeRequest(
+    token, 'get', `/gateway`,
+    undefined,
+    undefined
+  )
+}
+
+export function getGatewayBot(
+  token: string
+) {
+  return makeRequest(
+    token, 'get', `/gateway/bot`,
+    undefined,
+    undefined
+  )
+}
+
 export function getGuildAuditLog(
   token: string,
   guild_id: string,

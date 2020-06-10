@@ -1,5 +1,6 @@
 import * as WS from "https://deno.land/std@0.55.0/ws/mod.ts"
 import { Signaler } from "../util/signals.ts";
+import { getGateway } from "../generated/endpoints.ts";
 
 /** Opcodes which can be sent or recieved by the gateway. */
 enum Opcode {
@@ -61,8 +62,7 @@ class GatewayInterface extends Signaler {
  * @returns A `Signaler` which emits events recieved from the gateway.
  */
 export async function openGateway(token: string, intents?: number, { gatewayVersion = 6 } = {}) {
-  const gatewayReq = await fetch('https://discord.com/api/gateway'),
-        gatewayUrl = (await gatewayReq.json()).url + `?v=${gatewayVersion}&encoding=json`,
+  const gatewayUrl = (await getGateway(token).then(r => r.json())).url + `?v=${gatewayVersion}&encoding=json`,
         dispatcher = new GatewayInterface
   
   async function gateway(resumeInfo?: { sessionId: string, seq: number|null }) {
