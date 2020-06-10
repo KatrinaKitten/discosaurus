@@ -887,3 +887,244 @@ export function getGuildVanityURL(
   )
 }
 
+export function getInvite(
+  token: string,
+  invite_code: string,
+  with_counts: boolean|undefined = undefined
+) {
+  return makeRequest(
+    token, 'get', `/invites/${invite_code}`,
+    {with_counts},
+    undefined
+  )
+}
+
+export function deleteInvite(
+  token: string,
+  invite_code: string
+) {
+  return makeRequest(
+    token, 'delete', `/invites/${invite_code}`,
+    undefined,
+    undefined
+  )
+}
+
+export function getCurrentUser(
+  token: string
+) {
+  return makeRequest(
+    token, 'get', `/users/@me`,
+    undefined,
+    undefined
+  )
+}
+
+export function getUser(
+  token: string,
+  user_id: string
+) {
+  return makeRequest(
+    token, 'get', `/users/${user_id}`,
+    undefined,
+    undefined
+  )
+}
+
+export function modifyCurrentUser(
+  token: string,
+  username: string|undefined = undefined,
+  avatar: string|undefined = undefined
+) {
+  return makeRequest(
+    token, 'patch', `/users/@me`,
+    undefined,
+    {username,avatar}
+  )
+}
+
+export function getCurrentUserGuilds(
+  token: string,
+  before: string|undefined = undefined,
+  after: string|undefined = undefined,
+  limit: number|undefined = undefined
+) {
+  return makeRequest(
+    token, 'get', `/users/@me/guilds`,
+    {before,after,limit},
+    undefined
+  )
+}
+
+export function leaveGuild(
+  token: string,
+  guild_id: string
+) {
+  return makeRequest(
+    token, 'delete', `/users/@me/guilds/${guild_id}`,
+    undefined,
+    undefined
+  )
+}
+
+export function createDM(
+  token: string,
+  recipient_id: string
+) {
+  return makeRequest(
+    token, 'post', `/users/@me/channels`,
+    undefined,
+    {recipient_id}
+  )
+}
+
+export function getUserConnections(
+  token: string
+) {
+  return makeRequest(
+    token, 'get', `/users/@me/connections`,
+    undefined,
+    undefined
+  )
+}
+
+export function getVoiceRegions(
+  token: string
+) {
+  return makeRequest(
+    token, 'get', `/voice/regions`,
+    undefined,
+    undefined
+  )
+}
+
+export function createWebhook(
+  token: string,
+  channel_id: string,
+  name: string,
+  avatar: string|null = null
+) {
+  return makeRequest(
+    token, 'post', `/channels/${channel_id}/webhooks`,
+    undefined,
+    {name,avatar}
+  )
+}
+
+export function getChannelWebhooks(
+  token: string,
+  channel_id: string
+) {
+  return makeRequest(
+    token, 'get', `/channels/${channel_id}/webhooks`,
+    undefined,
+    undefined
+  )
+}
+
+export function getGuildWebhooks(
+  token: string,
+  guild_id: string
+) {
+  return makeRequest(
+    token, 'get', `/guilds/${guild_id}/webhooks`,
+    undefined,
+    undefined
+  )
+}
+
+export function getWebhook(
+  token: string,
+  webhook_id: string
+) {
+  return makeRequest(
+    token, 'get', `/webhooks/${webhook_id}`,
+    undefined,
+    undefined
+  )
+}
+
+export function getWebhookWithToken(
+  token: string,
+  webhook_id: string,
+  webhook_token: string
+) {
+  return makeRequest(
+    token, 'get', `/webhooks/${webhook_id}/${webhook_token}`,
+    undefined,
+    undefined
+  )
+}
+
+export function modifyWebhook(
+  token: string,
+  webhook_id: string,
+  name: string|undefined = undefined,
+  avatar: string|undefined = undefined,
+  channel_id: string|undefined = undefined
+) {
+  return makeRequest(
+    token, 'patch', `/webhooks/${webhook_id}`,
+    undefined,
+    {name,avatar,channel_id}
+  )
+}
+
+export function modifyWebhookWithToken(
+  token: string,
+  webhook_id: string,
+  webhook_token: string,
+  name: string|undefined = undefined,
+  avatar: string|undefined = undefined,
+  channel_id: string|undefined = undefined
+) {
+  return makeRequest(
+    token, 'patch', `/webhooks/${webhook_id}/${webhook_token}`,
+    undefined,
+    {name,avatar,channel_id}
+  )
+}
+
+export function deleteWebhook(
+  token: string,
+  webhook_id: string
+) {
+  return makeRequest(
+    token, 'delete', `/webhooks/${webhook_id}`,
+    undefined,
+    undefined
+  )
+}
+
+export function deleteWebhookWithToken(
+  token: string,
+  webhook_id: string,
+  webhook_token: string
+) {
+  return makeRequest(
+    token, 'delete', `/webhooks/${webhook_id}/${webhook_token}`,
+    undefined,
+    undefined
+  )
+}
+
+export function executeWebhook(
+  token: string,
+  webhook_id: string,
+  webhook_token: string,
+  wait: boolean|undefined = undefined,
+  content: string|undefined = undefined,
+  username: string|undefined = undefined,
+  avatar_url: string|undefined = undefined,
+  tts: boolean|undefined = undefined,
+  file: string|undefined = undefined,
+  embeds: Embed[]|undefined = undefined,
+  allowed_mentions: { parse?: ('roles'|'users'|'everyone')[], users?: string[], roles?: string[] }|undefined = undefined
+) {
+  return makeRequest(
+    token, 'post', `/webhooks/${webhook_id}/${webhook_token}`,
+    {wait},
+    {content,username,avatar_url,tts,file,embeds,allowed_mentions}
+  )
+}
+

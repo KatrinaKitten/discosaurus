@@ -739,6 +739,169 @@
       "method": "get",
       "path": "/guilds/{guild_id}/vanity-url",
       "path_schema": { "guild_id": "string" }
+    },
+
+    "getInvite": {
+      "method": "get",
+      "path": "/invites/{invite_code}",
+
+      "path_schema": { "invite_code": "string" },
+      "query_schema": {
+        "with_counts": { "type": "boolean", "optional": true }
+      }
+    },
+
+    "deleteInvite": {
+      "method": "delete",
+      "path": "/invites/{invite_code}",
+      "path_schema": { "invite_code": "string" }
+    },
+
+    "getCurrentUser": {
+      "method": "get",
+      "path": "/users/@me"
+    },
+
+    "getUser": {
+      "method": "get",
+      "path": "/users/{user_id}",
+      "path_schema": { "user_id": "string" }
+    },
+
+    "modifyCurrentUser": {
+      "method": "patch",
+      "path": "/users/@me",
+      
+      "body_schema": {
+        "username": { "type": "string", "optional": true },
+        "avatar": { "type": "string", "optional": true, "nullable": true }
+      }
+    },
+
+    "getCurrentUserGuilds": {
+      "method": "get",
+      "path": "/users/@me/guilds",
+
+      "query_schema": {
+        "before": "string",
+        "after": "string",
+        "limit": "number"
+      }
+    },
+
+    "leaveGuild": {
+      "method": "delete",
+      "path": "/users/@me/guilds/{guild_id}",
+      "path_schema": { "guild_id": "string" }
+    },
+
+    "createDM": {
+      "method": "post",
+      "path": "/users/@me/channels",
+      "body_schema": { "recipient_id": "string" }
+    },
+
+    "getUserConnections": {
+      "method": "get",
+      "path": "/users/@me/connections"
+    },
+
+    "getVoiceRegions": {
+      "method": "get",
+      "path": "/voice/regions"
+    },
+
+    "createWebhook": {
+      "method": "post",
+      "path": "/channels/{channel_id}/webhooks",
+
+      "path_schema": { "channel_id": "string" },
+      "body_schema": {
+        "name": "string",
+        "avatar": { "type": "string", "nullable": true }
+      }
+    },
+
+    "getChannelWebhooks": {
+      "method": "get",
+      "path": "/channels/{channel_id}/webhooks",
+      "path_schema": { "channel_id": "string" }
+    },
+
+    "getGuildWebhooks": {
+      "method": "get",
+      "path": "/guilds/{guild_id}/webhooks",
+      "path_schema": { "guild_id": "string" }
+    },
+
+    "getWebhook": {
+      "method": "get",
+      "path": "/webhooks/{webhook_id}",
+      "path_schema": { "webhook_id": "string" }
+    },
+
+    "getWebhookWithToken": {
+      "method": "get",
+      "path": "/webhooks/{webhook_id}/{webhook_token}",
+      "path_schema": { "webhook_id": "string", "webhook_token": "string" }
+    },
+
+    "modifyWebhook": {
+      "method": "patch",
+      "path": "/webhooks/{webhook_id}",
+
+      "path_schema": { "webhook_id": "string" },
+      "body_schema": {
+        "name": { "type": "string", "optional": true },
+        "avatar": { "type": "string", "optional": true, "nullable": true },
+        "channel_id": { "type": "string", "optional": true }
+      }
+    },
+
+    "modifyWebhookWithToken": {
+      "method": "patch",
+      "path": "/webhooks/{webhook_id}/{webhook_token}",
+
+      "path_schema": { "webhook_id": "string", "webhook_token": "string" },
+      "body_schema": {
+        "name": { "type": "string", "optional": true },
+        "avatar": { "type": "string", "optional": true, "nullable": true },
+        "channel_id": { "type": "string", "optional": true }
+      }
+    },
+
+    "deleteWebhook": {
+      "method": "delete",
+      "path": "/webhooks/{webhook_id}",
+      "path_schema": { "webhook_id": "string" }
+    },
+
+    "deleteWebhookWithToken": {
+      "method": "delete",
+      "path": "/webhooks/{webhook_id}/{webhook_token}",
+      "path_schema": { "webhook_id": "string", "webhook_token": "string" }
+    },
+
+    "executeWebhook": {
+      "method": "post",
+      "path": "/webhooks/{webhook_id}/{webhook_token}",
+
+      "path_schema": { "webhook_id": "string", "webhook_token": "string" },
+      "query_schema": { "wait": "boolean" },
+
+      "body_schema": {
+        "content": { "type": "string", "optional": true },
+        "username": { "type": "string", "optional": true },
+        "avatar_url": { "type": "string", "optional": true },
+        "tts": { "type": "boolean", "optional": true },
+        "file": { "type": "string", "optional": true },
+        "embeds": { "type": "Embed[]", "optional": true },
+
+        "allowed_mentions": {
+          "type": "{ parse?: ('roles'|'users'|'everyone')[], users?: string[], roles?: string[] }",
+          "optional": true
+        }
+      }
     }
   }
 } 
