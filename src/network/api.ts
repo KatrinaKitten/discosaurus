@@ -2,19 +2,22 @@ import { RateLimiter } from "../util/ratelimits.ts"
 import { objectEntries } from '../util/functions.ts'
 
 const apiBase = 'https://discord.com/api/'
-const rateLimiter = new RateLimiter()
 
 /**
- * Make a request to Discord's API.
+ * Make a request to Discord's API using the specified `RateLimiter` instance instead of the default.
+ * Prefer `makeRequest` to this unless you explicitly need to override the limiter instance.
+ * 
  * This should almost never be called directly! Use generated methods for specific endpoints instead.
  * 
+ * @param limiter The `RateLimiter` instance to use.
  * @param token The bot token to authenticate with.
  * @param method The HTTP method to use.
  * @param path The endpoint path in Discord's API, prefilled with any path parameters.
  * @param queryData Parameters to be serialized as a query string.
  * @param bodyData Parameters to be passed in the request body.
  */
-export async function makeRequest(
+export async function makeRequestWithLimiter(
+  limiter: RateLimiter,
   token: string, 
   method: 'get'|'post'|'put'|'patch'|'delete', 
   path: string, 
@@ -25,7 +28,7 @@ export async function makeRequest(
   let body = bodyData && JSON.stringify(bodyData)
   let url = apiBase+path+'?'+new URLSearchParams(objectEntries(queryData||{}).map(([k,v]) => [k,encodeURI(v.toString())])).toString()
 
-  let resp = await rateLimiter.limit(bucket, () => fetch(url, {
+  let resp = await limiter.limit(bucket, () => fetch(url, {
     method: method.toUpperCase(),
     headers: {
       'Authorization': `Bot ${token.trim()}`,
@@ -46,15 +49,29 @@ export async function makeRequest(
   return resp
 }
 
+/**
+ * Make a request to Discord's API.
+ * 
+ * This should almost never be called directly! Use generated methods for specific endpoints instead.
+ * 
+ * @param token The bot token to authenticate with.
+ * @param method The HTTP method to use.
+ * @param path The endpoint path in Discord's API, prefilled with any path parameters.
+ * @param queryData Parameters to be serialized as a query string.
+ * @param bodyData Parameters to be passed in the request body.
+ */
+export const makeRequest = makeRequestWithLimiter.bind(null, new RateLimiter)
+
 export * from '../generated/endpoints.ts'
 
 /** https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions */
 export function modifyGuildChannelPositions(
+  requestFunc: typeof makeRequest,
   token: string, 
   guild_id: string,
   positions: { id: string, position: number|null }[]
 ) {
-  return makeRequest(
+  return requestFunc(
     token, 'patch', `/guilds/${guild_id}/channels`, `/guilds/${guild_id}/channels`, 
     undefined, 
     positions
@@ -63,22 +80,24 @@ export function modifyGuildChannelPositions(
 
 /** https://discord.com/developers/docs/resources/guild#modify-guild-role-positions */
 export function modifyGuildRolePositions(
+  requestFunc: typeof makeRequest,
   token: string, 
   guild_id: string,
   positions: { id: string, position: number|null }[]
 ) {
-  return makeRequest(
+  return requestFunc(
     token, 'patch', `/guilds/${guild_id}/roles`, `/guilds/${guild_id}/roles`, 
     undefined, 
     positions
   )
 }
 
-import { default as bindToken } from '../generated/endpoints.ts'
+import { default as bindEndpoints } from '../generated/endpoints.ts'
 export default function boundTo(token: string) { return {
-  ...bindToken(token),
+  ...bindEndpoints(makeRequest, token),
+  
   /** https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions */
-  modifyGuildChannelPositions: modifyGuildChannelPositions.bind(null, token),
+  modifyGuildChannelPositions: modifyGuildChannelPositions.bind(null, makeRequest, token),
   /** https://discord.com/developers/docs/resources/guild#modify-guild-role-positions */
-  modifyGuildRolePositions: modifyGuildRolePositions.bind(null, token),
+  modifyGuildRolePositions: modifyGuildRolePositions.bind(null, makeRequest, token),
 }}

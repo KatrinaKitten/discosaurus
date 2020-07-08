@@ -63,9 +63,10 @@ for(let [name, def] of objectEntries(defs.endpoints)) {
   console.log(`
     /** ${def.doc} */
     export function ${name}(
+      requestFunc: typeof makeRequest,
       token: string${pathFnArgs}${queryFnArgs}${bodyFnArgs}
     ) {
-      return makeRequest(
+      return requestFunc(
         token, '${def.method}', \`${def.path.replace(/\{/g,'${')}\`, \`${def.path.replace(/\{/,'${')}\`,
         ${queryArgNames.length ? '{'+queryArgNames.join(',')+'}' : 'undefined'},
         ${bodyArgNames.length ? '{'+bodyArgNames.join(',')+'}' : 'undefined'}
@@ -75,9 +76,9 @@ for(let [name, def] of objectEntries(defs.endpoints)) {
   console.log()
 }
 
-console.log(`export default function boundTo(token: string) { return {`)
+console.log(`export default function boundTo(requestFunc: typeof makeRequest, token: string) { return {`)
 for(let [name,def] of Object.entries(defs.endpoints)) {
   console.log(`  /** ${def.doc} */`)
-  console.log(`  ${name}: ${name}.bind(null, token),`)
+  console.log(`  ${name}: ${name}.bind(null, requestFunc, token),`)
 }
 console.log(`}}`)
