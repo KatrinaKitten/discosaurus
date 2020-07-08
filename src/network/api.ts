@@ -59,3 +59,9 @@ export function modifyGuildChannelPositions(
     positions
   )
 }
+
+import { default as bindToken } from '../generated/endpoints.ts'
+export default function boundTo(token: string) { return {
+  ...bindToken(token),
+  modifyGuildChannelPositions: modifyGuildChannelPositions.bind(null, token)
+}}

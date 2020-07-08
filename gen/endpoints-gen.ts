@@ -72,3 +72,9 @@ for(let [name, def] of objectEntries(defs.endpoints)) {
   `.trim().replace(/^ {4}/gm,''))
   console.log()
 }
+
+console.log(`export default function boundTo(token: string) { return {`)
+for(let name of Object.keys(defs.endpoints)) {
+  console.log(`  ${name}: ${name}.bind(null, token),`)
+}
+console.log(`}}`)

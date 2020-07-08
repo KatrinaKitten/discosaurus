@@ -13,10 +13,10 @@ client.connect('message_create', async message => {
   if(message.content.startsWith('saur.')) {
     switch(message.content.slice(5).split(' ',2)[0]) {
       case 'ping': 
-        await client.api.createMessage(token, message.channel_id, `Pong! | ${+new Date - +new Date(message.timestamp)}ms`)
+        await client.api.createMessage(message.channel_id, `Pong! | ${+new Date - +new Date(message.timestamp)}ms`)
         break
       case 'dino':
-        await client.api.createMessage(token, message.channel_id, dinos[Math.random()*dinos.length|0])
+        await client.api.createMessage(message.channel_id, dinos[Math.random()*dinos.length|0])
         break
     }
   }

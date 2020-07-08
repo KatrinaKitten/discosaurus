@@ -1,2 +1,2 @@
 @echo off
-deno run --allow-read gen/gen_endpoints.ts > src/generated/endpoints.ts
+deno run --allow-read gen/endpoints-gen.ts > src/generated/endpoints.ts
