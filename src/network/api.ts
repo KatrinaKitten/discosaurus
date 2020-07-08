@@ -31,7 +31,7 @@ export async function makeRequest(
       'Authorization': `Bot ${token.trim()}`,
       'Content-Type': 'application/json',
       'X-RateLimit-Precision': 'millisecond',
-      'User-Agent': 'DiscordBot (discosaurus, 0.1.0)' // TODO: Pull from user bot data
+      'User-Agent': 'DiscordBot (discosaurus, 0.1.0)'
     },
     body: body
   }), resp => ({
@@ -60,8 +60,21 @@ export function modifyGuildChannelPositions(
   )
 }
 
+export function modifyGuildRolePositions(
+  token: string, 
+  guild_id: string,
+  positions: { id: string, position: number|null }[]
+) {
+  return makeRequest(
+    token, 'patch', `/guilds/${guild_id}/roles`, `/guilds/${guild_id}/roles`, 
+    undefined, 
+    positions
+  )
+}
+
 import { default as bindToken } from '../generated/endpoints.ts'
 export default function boundTo(token: string) { return {
   ...bindToken(token),
-  modifyGuildChannelPositions: modifyGuildChannelPositions.bind(null, token)
+  modifyGuildChannelPositions: modifyGuildChannelPositions.bind(null, token),
+  modifyGuildRolePositions: modifyGuildRolePositions.bind(null, token),
 }}
