@@ -1,5 +1,5 @@
 import * as WS from "https://deno.land/std@0.55.0/ws/mod.ts"
-import { getGateway } from "../generated/endpoints.ts";
+import API from "./api.ts";
 import { GatewayInterface } from "./gateway_interface.ts";
 
 /** Opcodes which can be sent or recieved by the gateway. */
@@ -52,7 +52,7 @@ type GatewayOptions = {
  * @returns A `Signaler` which emits events recieved from the gateway.
  */
 export async function openGateway(token: string, intents?: number, opts: GatewayOptions = {}) {
-  const gatewayUrl = (await getGateway(token).then(r => r.json())).url + `?v=${opts.gatewayVersion ?? 6}&encoding=json`,
+  const gatewayUrl = (await API(token).getGateway().then(r => r.json())).url + `?v=${opts.gatewayVersion ?? 6}&encoding=json`,
         dispatcher = opts.gwInterface ?? new GatewayInterface
   
   async function gateway(resumeInfo?: { sessionId: string, seq: number|null }) {
