@@ -22,9 +22,10 @@
       "patternProperties": {
         "^[a-z][a-zA-Z0-9_]*$": {
           "type": "object",
-          "required": ["method", "path"],
+          "required": ["method", "path", "doc"],
           "additionalProperties": false,
           "properties": {
+            "doc": { "type": "string", "format": "uri", "description": "The URL of Discord's documentation for this endpoint." },
             "method": { "type": "string", "enum": ["get","post","patch","put","delete"], "description": "The HTTP method to use." },
             "path": { "type": "string", "format": "uri-reference", "description": "The endpoint path in Discord's API." },
 

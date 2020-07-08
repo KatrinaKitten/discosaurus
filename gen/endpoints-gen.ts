@@ -11,6 +11,7 @@ const defs = JSON.parse(await Deno.readTextFile(inputPath)) as {
   enums: {[name: string]: string[]}
 
   endpoints: {[name: string]: {
+    doc: string,
     method: 'get'|'post'|'put'|'patch'|'delete'
     path: string
     path_schema?: {[k: string]: ValueSchema}
@@ -60,6 +61,7 @@ for(let [name, def] of objectEntries(defs.endpoints)) {
   let queryFnArgs = queryArgs ? ',\n  '+queryArgs?.map(a => a.fnArg).join(',\n  ') : ''
 
   console.log(`
+    /** ${def.doc} */
     export function ${name}(
       token: string${pathFnArgs}${queryFnArgs}${bodyFnArgs}
     ) {
@@ -74,7 +76,8 @@ for(let [name, def] of objectEntries(defs.endpoints)) {
 }
 
 console.log(`export default function boundTo(token: string) { return {`)
-for(let name of Object.keys(defs.endpoints)) {
+for(let [name,def] of Object.entries(defs.endpoints)) {
+  console.log(`  /** ${def.doc} */`)
   console.log(`  ${name}: ${name}.bind(null, token),`)
 }
 console.log(`}}`)

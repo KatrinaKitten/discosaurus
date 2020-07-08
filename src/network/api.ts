@@ -48,6 +48,7 @@ export async function makeRequest(
 
 export * from '../generated/endpoints.ts'
 
+/** https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions */
 export function modifyGuildChannelPositions(
   token: string, 
   guild_id: string,
@@ -60,6 +61,7 @@ export function modifyGuildChannelPositions(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#modify-guild-role-positions */
 export function modifyGuildRolePositions(
   token: string, 
   guild_id: string,
@@ -75,6 +77,8 @@ export function modifyGuildRolePositions(
 import { default as bindToken } from '../generated/endpoints.ts'
 export default function boundTo(token: string) { return {
   ...bindToken(token),
+  /** https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions */
   modifyGuildChannelPositions: modifyGuildChannelPositions.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#modify-guild-role-positions */
   modifyGuildRolePositions: modifyGuildRolePositions.bind(null, token),
 }}

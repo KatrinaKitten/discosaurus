@@ -15,16 +15,19 @@
 
   "endpoints": {
     "getGateway": {
+      "doc": "https://discord.com/developers/docs/topics/gateway#get-gateway",
       "method": "get",
       "path": "/gateway"
     },
 
     "getGatewayBot": {
+      "doc": "https://discord.com/developers/docs/topics/gateway#get-gateway-bot",
       "method": "get",
       "path": "/gateway/bot"
     },
 
     "getGuildAuditLog": {
+      "doc": "https://discord.com/developers/docs/resources/audit-log#get-guild-audit-log",
       "method": "get",
       "path": "/guilds/{guild_id}/audit-logs",
   
@@ -36,12 +39,14 @@
     },
 
     "getChannel": {
+      "doc": "https://discord.com/developers/docs/resources/channel#get-channel",
       "method": "get",
       "path": "/channels/{channel_id}",
       "path_schema": { "channel_id": "string" }
     },
 
     "modifyChannel": {
+      "doc": "https://discord.com/developers/docs/resources/channel#modify-channel",
       "method": "patch",
       "path": "/channels/{channel_id}",
       
@@ -61,12 +66,14 @@
     },
 
     "deleteChannel": {
+      "doc": "https://discord.com/developers/docs/resources/channel#deleteclose-channel",
       "method": "delete",
       "path": "/channels/{channel_id}",
       "path_schema": { "channel_id": "string" }
     },
 
     "getChannelMessages": {
+      "doc": "https://discord.com/developers/docs/resources/channel#get-channel-messages",
       "method": "get",
       "path": "/channels/{channel_id}/messages",
 
@@ -80,6 +87,7 @@
     },
 
     "getChannelMessage": {
+      "doc": "https://discord.com/developers/docs/resources/channel#get-channel-message",
       "method": "get",
       "path": "/channels/{channel_id}/messages/{message_id}",
       "path_schema": { 
@@ -89,6 +97,7 @@
     },
 
     "createMessage": {
+      "doc": "https://discord.com/developers/docs/resources/channel#create-message",
       "method": "post",
       "path": "/channels/{channel_id}/messages",
       
@@ -106,6 +115,7 @@
     },
 
     "createReaction": {
+      "doc": "https://discord.com/developers/docs/resources/channel#create-reaction",
       "method": "put",
       "path": "/channels/{channel_id}/messages/{message_id}/reactions/{emoji}/@me",
 
@@ -117,6 +127,7 @@
     },
 
     "deleteOwnReaction": {
+      "doc": "https://discord.com/developers/docs/resources/channel#delete-own-reaction",
       "method": "delete",
       "path": "/channels/{channel_id}/messages/{message_id}/reactions/{emoji}/@me",
 
@@ -128,6 +139,7 @@
     },
 
     "deleteUserReaction": {
+      "doc": "https://discord.com/developers/docs/resources/channel#delete-user-reaction",
       "method": "delete",
       "path": "/channels/{channel_id}/messages/{message_id}/reactions/{emoji}/{user_id}",
 
@@ -140,6 +152,7 @@
     },
 
     "getReactions": {
+      "doc": "https://discord.com/developers/docs/resources/channel#get-reactions",
       "method": "get",
       "path": "/channels/{channel_id}/messages/{message_id}/reactions/{emoji}",
 
@@ -157,6 +170,7 @@
     },
 
     "deleteAllReactions": {
+      "doc": "https://discord.com/developers/docs/resources/channel#delete-all-reactions",
       "method": "delete",
       "path": "/channels/{channel_id}/messages/{message_id}/reactions",
 
@@ -167,6 +181,7 @@
     },
 
     "deleteAllReactionsForEmoji": {
+      "doc": "https://discord.com/developers/docs/resources/channel#delete-all-reactions-for-emoji",
       "method": "delete",
       "path": "/channels/{channel_id}/messages/{message_id}/reactions/{emoji}",
 
@@ -178,6 +193,7 @@
     },
 
     "editMessage": {
+      "doc": "https://discord.com/developers/docs/resources/channel#edit-message",
       "method": "patch",
       "path": "/channels/{channel_id}/messages/{message_id}",
 
@@ -195,6 +211,7 @@
     },
 
     "deleteMessage": {
+      "doc": "https://discord.com/developers/docs/resources/channel#delete-message",
       "method": "delete",
       "path": "/channels/{channel_id}/messages/{message_id}",
 
@@ -205,12 +222,14 @@
     },
 
     "bulkDeleteMessages": {
+      "doc": "https://discord.com/developers/docs/resources/channel#bulk-delete-messages",
       "method": "post",
       "path": "/channels/{channel_id}/messages/bulk-delete",
       "path_schema": { "channel_id": "string" }
     },
 
     "editChannelPermissions": {
+      "doc": "https://discord.com/developers/docs/resources/channel#edit-channel-permissions",
       "method": "put",
       "path": "/channels/{channel_id}/permissions/{overwrite_id}",
 
@@ -227,12 +246,14 @@
     },
 
     "getChannelInvites": {
+      "doc": "https://discord.com/developers/docs/resources/channel#get-channel-invites",
       "method": "get",
       "path": "/channels/{channel_id}/invites",
       "path_schema": { "channel_id": "string" }
     },
 
     "createChannelInvite": {
+      "doc": "https://discord.com/developers/docs/resources/channel#create-channel-invite",
       "method": "post",
       "path": "/channels/{channel_id}/invites",
 
@@ -248,6 +269,7 @@
     },
 
     "deleteChannelPermission": {
+      "doc": "https://discord.com/developers/docs/resources/channel#delete-channel-permission",
       "method": "delete",
       "path": "/channels/{channel_id}/permissions/{overwrite_id}",
 
@@ -258,18 +280,21 @@
     },
 
     "triggerTypingIndicator": {
+      "doc": "https://discord.com/developers/docs/resources/channel#trigger-typing-indicator",
       "method": "post",
       "path": "/channels/{channel_id}/typing",
       "path_schema": { "channel_id": "string" }
     },
 
     "getPinnedMessages": {
+      "doc": "https://discord.com/developers/docs/resources/channel#get-pinned-messages",
       "method": "get",
       "path": "/channels/{channel_id}/pins",
       "path_schema": { "channel_id": "string" }
     },
 
     "addPinnedChannelMessage": {
+      "doc": "https://discord.com/developers/docs/resources/channel#add-pinned-channel-message",
       "method": "put",
       "path": "/channels/{channel_id}/pins/{message_id}",
 
@@ -280,6 +305,7 @@
     },
 
     "deletePinnedChannelMessage": {
+      "doc": "https://discord.com/developers/docs/resources/channel#delete-pinned-channel-message",
       "method": "delete",
       "path": "/channels/{channel_id}/pins/{message_id}",
 
@@ -290,6 +316,7 @@
     },
 
     "groupDMAddRecipient": {
+      "doc": "https://discord.com/developers/docs/resources/channel#group-dm-add-recipient",
       "method": "put",
       "path": "/channels/{channel_id}/recipients/{user_id}",
 
@@ -305,6 +332,7 @@
     },
 
     "groupDMRemoveRecipient": {
+      "doc": "https://discord.com/developers/docs/resources/channel#group-dm-remove-recipient",
       "method": "delete",
       "path": "/channels/{channel_id}/recipients/{user_id}",
 
@@ -315,12 +343,14 @@
     },
 
     "listGuildEmojis": {
+      "doc": "https://discord.com/developers/docs/resources/emoji#list-guild-emojis",
       "method": "get",
       "path": "/guilds/{guild_id}/emojis",
       "path_schema": { "guild_id": "string" }
     },
 
     "getGuildEmoji": {
+      "doc": "https://discord.com/developers/docs/resources/emoji#get-guild-emoji",
       "method": "get",
       "path": "/guilds/{guild_id}/emojis/{emoji_id}",
 
@@ -331,6 +361,7 @@
     },
 
     "createGuildEmoji": {
+      "doc": "https://discord.com/developers/docs/resources/emoji#create-guild-emoji",
       "method": "post",
       "path": "/guilds/{guild_id}/emojis",
 
@@ -343,6 +374,7 @@
     },
 
     "modifyGuildEmoji": {
+      "doc": "https://discord.com/developers/docs/resources/emoji#modify-guild-emoji",
       "method": "patch",
       "path": "/guilds/{guild_id}/emojis/{emoji_id}",
 
@@ -358,6 +390,7 @@
     },
 
     "deleteGuildEmoji": {
+      "doc": "https://discord.com/developers/docs/resources/emoji#delete-guild-emoji",
       "method": "delete",
       "path": "/guilds/{guild_id}/emojis/{emoji_id}",
 
@@ -368,6 +401,7 @@
     },
   
     "createGuild": {
+      "doc": "https://discord.com/developers/docs/resources/guild#create-guild",
       "method": "post",
       "path": "/guilds",
   
@@ -387,6 +421,7 @@
     },
 
     "getGuild": {
+      "doc": "https://discord.com/developers/docs/resources/guild#get-guild",
       "method": "get",
       "path": "/guilds/{guild_id}",
 
@@ -397,12 +432,14 @@
     },
 
     "getGuildPreview": {
+      "doc": "https://discord.com/developers/docs/resources/guild#get-guild-preview",
       "method": "get",
       "path": "/guilds/{guild_id}/preview",
       "path_schema": { "guild_id": "string" }
     },
 
     "modifyGuild": {
+      "doc": "https://discord.com/developers/docs/resources/guild#modify-guild",
       "method": "patch",
       "path": "/guilds/{guild_id}",
 
@@ -427,18 +464,21 @@
     },
 
     "deleteGuild": {
+      "doc": "https://discord.com/developers/docs/resources/guild#delete-guild",
       "method": "delete",
       "path": "/guilds/{guild_id}",
       "path_schema": { "guild_id": "string" }
     },
 
     "getGuildChannels": {
+      "doc": "https://discord.com/developers/docs/resources/guild#get-guild-channels",
       "method": "get",
       "path": "/guilds/{guild_id}/channels",
       "path_schema": { "guild_id": "string" }
     },
 
     "createGuildChannel": {
+      "doc": "https://discord.com/developers/docs/resources/guild#create-guild-channel",
       "method": "post",
       "path": "/guilds/{guild_id}/channels",
 
@@ -458,6 +498,7 @@
     },
 
     "getGuildMember": {
+      "doc": "https://discord.com/developers/docs/resources/guild#get-guild-member",
       "method": "get",
       "path": "/guilds/{guild_id}/members/{user_id}",
 
@@ -468,12 +509,14 @@
     },
 
     "listGuildMembers": {
+      "doc": "https://discord.com/developers/docs/resources/guild#list-guild-members",
       "method": "get",
       "path": "/guilds/{guild_id}/members",
       "path_schema": { "guild_id": "string" }
     },
 
     "addGuildMember": {
+      "doc": "https://discord.com/developers/docs/resources/guild#add-guild-member",
       "method": "put",
       "path": "/guilds/{guild_id}/members/{user_id}",
 
@@ -492,6 +535,7 @@
     },
 
     "modifyGuildMember": {
+      "doc": "https://discord.com/developers/docs/resources/guild#modify-guild-member",
       "method": "patch",
       "path": "/guilds/{guild_id}/members/{user_id}",
 
@@ -510,6 +554,7 @@
     },
 
     "modifyCurrentUserNick": {
+      "doc": "https://discord.com/developers/docs/resources/guild#modify-current-user-nick",
       "method": "patch",
       "path": "/guilds/{guild_id}/members/@me/nick",
       
@@ -520,6 +565,7 @@
     },
 
     "addGuildMemberRole": {
+      "doc": "https://discord.com/developers/docs/resources/guild#add-guild-member-role",
       "method": "put",
       "path": "/guilds/{guild_id}/members/{user_id}/roles/{role_id}",
 
@@ -531,6 +577,7 @@
     },
 
     "removeGuildMemberRole": {
+      "doc": "https://discord.com/developers/docs/resources/guild#remove-guild-member-role",
       "method": "delete",
       "path": "/guilds/{guild_id}/members/{user_id}/roles/{role_id}",
 
@@ -542,6 +589,7 @@
     },
 
     "removeGuildMember": {
+      "doc": "https://discord.com/developers/docs/resources/guild#remove-guild-member",
       "method": "delete",
       "path": "/guilds/{guild_id}/members/{user_id}",
 
@@ -552,12 +600,14 @@
     },
 
     "getGuildBans": {
+      "doc": "https://discord.com/developers/docs/resources/guild#get-guild-bans",
       "method": "get",
       "path": "/guilds/{guild_id}/bans",
       "path_schema": { "guild_id": "string" }
     },
 
     "getGuildBan": {
+      "doc": "https://discord.com/developers/docs/resources/guild#get-guild-ban",
       "method": "get",
       "path": "/guilds/{guild_id}/bans/{user_id}",
 
@@ -568,6 +618,7 @@
     },
 
     "createGuildBan": {
+      "doc": "https://discord.com/developers/docs/resources/guild#create-guild-ban",
       "method": "put",
       "path": "/guilds/{guild_id}/bans/{user_id}",
 
@@ -583,6 +634,7 @@
     },
 
     "removeGuildBan": {
+      "doc": "https://discord.com/developers/docs/resources/guild#remove-guild-ban",
       "method": "delete",
       "path": "/guilds/{guild_id}/bans/{user_id}",
 
@@ -593,12 +645,14 @@
     },
 
     "getGuildRoles": {
+      "doc": "https://discord.com/developers/docs/resources/guild#get-guild-roles",
       "method": "get",
       "path": "/guilds/{guild_id}/roles",
       "path_schema": { "guild_id": "string" }
     },
 
     "createGuildRole": {
+      "doc": "https://discord.com/developers/docs/resources/guild#create-guild-role",
       "method": "post",
       "path": "/guilds/{guild_id}/roles",
 
@@ -613,6 +667,7 @@
     },
 
     "modifyGuildRole": {
+      "doc": "https://discord.com/developers/docs/resources/guild#modify-guild-role",
       "method": "patch",
       "path": "/guilds/{guild_id}/roles/{role_id}",
 
@@ -631,6 +686,7 @@
     },
 
     "deleteGuildRole": {
+      "doc": "https://discord.com/developers/docs/resources/guild#delete-guild-role",
       "method": "delete",
       "path": "/guilds/{guild_id}/roles/{role_id}",
 
@@ -641,6 +697,7 @@
     },
 
     "getGuildPruneCount": {
+      "doc": "https://discord.com/developers/docs/resources/guild#get-guild-prune-count",
       "method": "get",
       "path": "/guilds/{guild_id}/prune",
 
@@ -652,6 +709,7 @@
     },
 
     "beginGuildPrune": {
+      "doc": "https://discord.com/developers/docs/resources/guild#begin-guild-prune",
       "method": "post",
       "path": "/guilds/{guild_id}/prune",
 
@@ -664,24 +722,28 @@
     },
 
     "getGuildVoiceRegions": {
+      "doc": "https://discord.com/developers/docs/resources/guild#get-guild-voice-regions",
       "method": "get",
       "path": "/guilds/{guild_id}/regions",
       "path_schema": { "guild_id": "string" }
     },
 
     "getGuildInvites": {
+      "doc": "https://discord.com/developers/docs/resources/guild#get-guild-invites",
       "method": "get",
       "path": "/guilds/{guild_id}/invites",
       "path_schema": { "guild_id": "string" }
     },
 
     "getGuildIntegrations": {
+      "doc": "https://discord.com/developers/docs/resources/guild#get-guild-integrations",
       "method": "get",
       "path": "/guilds/{guild_id}/integrations",
       "path_schema": { "guild_id": "string" }
     },
 
     "createGuildIntegration": {
+      "doc": "https://discord.com/developers/docs/resources/guild#create-guild-integration",
       "method": "post",
       "path": "/guilds/{guild_id}/integrations",
 
@@ -693,6 +755,7 @@
     },
 
     "modifyGuildIntegration": {
+      "doc": "https://discord.com/developers/docs/resources/guild#modify-guild-integration",
       "method": "patch",
       "path": "/guilds/{guild_id}/integrations/{integration_id}",
       
@@ -709,6 +772,7 @@
     },
     
     "deleteGuildIntegration": {
+      "doc": "https://discord.com/developers/docs/resources/guild#delete-guild-integration",
       "method": "delete",
       "path": "/guilds/{guild_id}/integrations/{integration_id}",
       
@@ -719,6 +783,7 @@
     },
 
     "syncGuildIntegration": {
+      "doc": "https://discord.com/developers/docs/resources/guild#sync-guild-integration",
       "method": "post",
       "path": "/guilds/{guild_id}/integrations/{integration_id}/sync",
       
@@ -729,12 +794,14 @@
     },
 
     "getGuildWidget": {
+      "doc": "https://discord.com/developers/docs/resources/guild#get-guild-widget",
       "method": "get",
       "path": "/guilds/{guild_id}/widget",
       "path_schema": { "guild_id": "string" }
     },
 
     "modifyGuildWidget": {
+      "doc": "https://discord.com/developers/docs/resources/guild#modify-guild-widget",
       "method": "patch",
       "path": "/guilds/{guild_id}/widget",
 
@@ -746,12 +813,14 @@
     },
 
     "getGuildVanityURL": {
+      "doc": "https://discord.com/developers/docs/resources/guild#get-guild-vanity-url",
       "method": "get",
       "path": "/guilds/{guild_id}/vanity-url",
       "path_schema": { "guild_id": "string" }
     },
 
     "getInvite": {
+      "doc": "https://discord.com/developers/docs/resources/invite#get-invite",
       "method": "get",
       "path": "/invites/{invite_code}",
 
@@ -762,23 +831,27 @@
     },
 
     "deleteInvite": {
+      "doc": "https://discord.com/developers/docs/resources/invite#delete-invite",
       "method": "delete",
       "path": "/invites/{invite_code}",
       "path_schema": { "invite_code": "string" }
     },
 
     "getCurrentUser": {
+      "doc": "https://discord.com/developers/docs/resources/user#get-current-user",
       "method": "get",
       "path": "/users/@me"
     },
 
     "getUser": {
+      "doc": "https://discord.com/developers/docs/resources/user#get-user",
       "method": "get",
       "path": "/users/{user_id}",
       "path_schema": { "user_id": "string" }
     },
 
     "modifyCurrentUser": {
+      "doc": "https://discord.com/developers/docs/resources/user#modify-current-user",
       "method": "patch",
       "path": "/users/@me",
       
@@ -789,6 +862,7 @@
     },
 
     "getCurrentUserGuilds": {
+      "doc": "https://discord.com/developers/docs/resources/user#get-current-user-guilds",
       "method": "get",
       "path": "/users/@me/guilds",
 
@@ -800,28 +874,33 @@
     },
 
     "leaveGuild": {
+      "doc": "https://discord.com/developers/docs/resources/user#leave-guild",
       "method": "delete",
       "path": "/users/@me/guilds/{guild_id}",
       "path_schema": { "guild_id": "string" }
     },
 
     "createDM": {
+      "doc": "https://discord.com/developers/docs/resources/user#create-dm",
       "method": "post",
       "path": "/users/@me/channels",
       "body_schema": { "recipient_id": "string" }
     },
 
     "getUserConnections": {
+      "doc": "https://discord.com/developers/docs/resources/user#get-user-connections",
       "method": "get",
       "path": "/users/@me/connections"
     },
 
-    "getVoiceRegions": {
+    "listVoiceRegions": {
+      "doc": "https://discord.com/developers/docs/resources/user#get-user-connections",
       "method": "get",
       "path": "/voice/regions"
     },
 
     "createWebhook": {
+      "doc": "https://discord.com/developers/docs/resources/webhook#create-webhook",
       "method": "post",
       "path": "/channels/{channel_id}/webhooks",
 
@@ -833,30 +912,35 @@
     },
 
     "getChannelWebhooks": {
+      "doc": "https://discord.com/developers/docs/resources/webhook#get-channel-webhooks",
       "method": "get",
       "path": "/channels/{channel_id}/webhooks",
       "path_schema": { "channel_id": "string" }
     },
 
     "getGuildWebhooks": {
+      "doc": "https://discord.com/developers/docs/resources/webhook#get-guild-webhooks",
       "method": "get",
       "path": "/guilds/{guild_id}/webhooks",
       "path_schema": { "guild_id": "string" }
     },
 
     "getWebhook": {
+      "doc": "https://discord.com/developers/docs/resources/webhook#get-webhook",
       "method": "get",
       "path": "/webhooks/{webhook_id}",
       "path_schema": { "webhook_id": "string" }
     },
 
     "getWebhookWithToken": {
+      "doc": "https://discord.com/developers/docs/resources/webhook#get-webhook-with-token",
       "method": "get",
       "path": "/webhooks/{webhook_id}/{webhook_token}",
       "path_schema": { "webhook_id": "string", "webhook_token": "string" }
     },
 
     "modifyWebhook": {
+      "doc": "https://discord.com/developers/docs/resources/webhook#modify-webhook",
       "method": "patch",
       "path": "/webhooks/{webhook_id}",
 
@@ -869,6 +953,7 @@
     },
 
     "modifyWebhookWithToken": {
+      "doc": "https://discord.com/developers/docs/resources/webhook#modify-webhook-with-token",
       "method": "patch",
       "path": "/webhooks/{webhook_id}/{webhook_token}",
 
@@ -881,18 +966,21 @@
     },
 
     "deleteWebhook": {
+      "doc": "https://discord.com/developers/docs/resources/webhook#delete-webhook",
       "method": "delete",
       "path": "/webhooks/{webhook_id}",
       "path_schema": { "webhook_id": "string" }
     },
 
     "deleteWebhookWithToken": {
+      "doc": "https://discord.com/developers/docs/resources/webhook#delete-webhook-with-token",
       "method": "delete",
       "path": "/webhooks/{webhook_id}/{webhook_token}",
       "path_schema": { "webhook_id": "string", "webhook_token": "string" }
     },
 
     "executeWebhook": {
+      "doc": "https://discord.com/developers/docs/resources/webhook#execute-webhook",
       "method": "post",
       "path": "/webhooks/{webhook_id}/{webhook_token}",
 

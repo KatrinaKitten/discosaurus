@@ -6,6 +6,7 @@ import { ExplicitContentFilter, MessageNotificationLevel, VerificationLevel } fr
 import { PermissionOverwrite } from '../types/permissions.ts'
 import { Role } from '../types/roles.ts'
 
+/** https://discord.com/developers/docs/topics/gateway#get-gateway */
 export function getGateway(
   token: string
 ) {
@@ -16,6 +17,7 @@ export function getGateway(
   )
 }
 
+/** https://discord.com/developers/docs/topics/gateway#get-gateway-bot */
 export function getGatewayBot(
   token: string
 ) {
@@ -26,6 +28,7 @@ export function getGatewayBot(
   )
 }
 
+/** https://discord.com/developers/docs/resources/audit-log#get-guild-audit-log */
 export function getGuildAuditLog(
   token: string,
   guild_id: string,
@@ -39,6 +42,7 @@ export function getGuildAuditLog(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#get-channel */
 export function getChannel(
   token: string,
   channel_id: string
@@ -50,6 +54,7 @@ export function getChannel(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#modify-channel */
 export function modifyChannel(
   token: string,
   channel_id: string,
@@ -71,6 +76,7 @@ export function modifyChannel(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#deleteclose-channel */
 export function deleteChannel(
   token: string,
   channel_id: string
@@ -82,6 +88,7 @@ export function deleteChannel(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#get-channel-messages */
 export function getChannelMessages(
   token: string,
   channel_id: string,
@@ -97,6 +104,7 @@ export function getChannelMessages(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#get-channel-message */
 export function getChannelMessage(
   token: string,
   channel_id: string,
@@ -109,6 +117,7 @@ export function getChannelMessage(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#create-message */
 export function createMessage(
   token: string,
   channel_id: string,
@@ -125,6 +134,7 @@ export function createMessage(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#create-reaction */
 export function createReaction(
   token: string,
   channel_id: string,
@@ -138,6 +148,7 @@ export function createReaction(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#delete-own-reaction */
 export function deleteOwnReaction(
   token: string,
   channel_id: string,
@@ -151,6 +162,7 @@ export function deleteOwnReaction(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#delete-user-reaction */
 export function deleteUserReaction(
   token: string,
   channel_id: string,
@@ -165,6 +177,7 @@ export function deleteUserReaction(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#get-reactions */
 export function getReactions(
   token: string,
   channel_id: string,
@@ -181,6 +194,7 @@ export function getReactions(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#delete-all-reactions */
 export function deleteAllReactions(
   token: string,
   channel_id: string,
@@ -193,6 +207,7 @@ export function deleteAllReactions(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#delete-all-reactions-for-emoji */
 export function deleteAllReactionsForEmoji(
   token: string,
   channel_id: string,
@@ -206,6 +221,7 @@ export function deleteAllReactionsForEmoji(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#edit-message */
 export function editMessage(
   token: string,
   channel_id: string,
@@ -222,6 +238,7 @@ export function editMessage(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#delete-message */
 export function deleteMessage(
   token: string,
   channel_id: string,
@@ -234,6 +251,7 @@ export function deleteMessage(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#bulk-delete-messages */
 export function bulkDeleteMessages(
   token: string,
   channel_id: string
@@ -245,6 +263,7 @@ export function bulkDeleteMessages(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#edit-channel-permissions */
 export function editChannelPermissions(
   token: string,
   channel_id: string,
@@ -260,6 +279,7 @@ export function editChannelPermissions(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#get-channel-invites */
 export function getChannelInvites(
   token: string,
   channel_id: string
@@ -271,6 +291,7 @@ export function getChannelInvites(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#create-channel-invite */
 export function createChannelInvite(
   token: string,
   channel_id: string,
@@ -288,6 +309,7 @@ export function createChannelInvite(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#delete-channel-permission */
 export function deleteChannelPermission(
   token: string,
   channel_id: string,
@@ -300,6 +322,7 @@ export function deleteChannelPermission(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#trigger-typing-indicator */
 export function triggerTypingIndicator(
   token: string,
   channel_id: string
@@ -311,6 +334,7 @@ export function triggerTypingIndicator(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#get-pinned-messages */
 export function getPinnedMessages(
   token: string,
   channel_id: string
@@ -322,6 +346,7 @@ export function getPinnedMessages(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#add-pinned-channel-message */
 export function addPinnedChannelMessage(
   token: string,
   channel_id: string,
@@ -334,6 +359,7 @@ export function addPinnedChannelMessage(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#delete-pinned-channel-message */
 export function deletePinnedChannelMessage(
   token: string,
   channel_id: string,
@@ -346,6 +372,7 @@ export function deletePinnedChannelMessage(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#group-dm-add-recipient */
 export function groupDMAddRecipient(
   token: string,
   channel_id: string,
@@ -360,6 +387,7 @@ export function groupDMAddRecipient(
   )
 }
 
+/** https://discord.com/developers/docs/resources/channel#group-dm-remove-recipient */
 export function groupDMRemoveRecipient(
   token: string,
   channel_id: string,
@@ -372,6 +400,7 @@ export function groupDMRemoveRecipient(
   )
 }
 
+/** https://discord.com/developers/docs/resources/emoji#list-guild-emojis */
 export function listGuildEmojis(
   token: string,
   guild_id: string
@@ -383,6 +412,7 @@ export function listGuildEmojis(
   )
 }
 
+/** https://discord.com/developers/docs/resources/emoji#get-guild-emoji */
 export function getGuildEmoji(
   token: string,
   guild_id: string,
@@ -395,6 +425,7 @@ export function getGuildEmoji(
   )
 }
 
+/** https://discord.com/developers/docs/resources/emoji#create-guild-emoji */
 export function createGuildEmoji(
   token: string,
   guild_id: string,
@@ -409,6 +440,7 @@ export function createGuildEmoji(
   )
 }
 
+/** https://discord.com/developers/docs/resources/emoji#modify-guild-emoji */
 export function modifyGuildEmoji(
   token: string,
   guild_id: string,
@@ -423,6 +455,7 @@ export function modifyGuildEmoji(
   )
 }
 
+/** https://discord.com/developers/docs/resources/emoji#delete-guild-emoji */
 export function deleteGuildEmoji(
   token: string,
   guild_id: string,
@@ -435,6 +468,7 @@ export function deleteGuildEmoji(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#create-guild */
 export function createGuild(
   token: string,
   name: string,
@@ -456,6 +490,7 @@ export function createGuild(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#get-guild */
 export function getGuild(
   token: string,
   guild_id: string,
@@ -468,6 +503,7 @@ export function getGuild(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#get-guild-preview */
 export function getGuildPreview(
   token: string,
   guild_id: string
@@ -479,6 +515,7 @@ export function getGuildPreview(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#modify-guild */
 export function modifyGuild(
   token: string,
   guild_id: string,
@@ -505,6 +542,7 @@ export function modifyGuild(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#delete-guild */
 export function deleteGuild(
   token: string,
   guild_id: string
@@ -516,6 +554,7 @@ export function deleteGuild(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#get-guild-channels */
 export function getGuildChannels(
   token: string,
   guild_id: string
@@ -527,6 +566,7 @@ export function getGuildChannels(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#create-guild-channel */
 export function createGuildChannel(
   token: string,
   guild_id: string,
@@ -548,6 +588,7 @@ export function createGuildChannel(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#get-guild-member */
 export function getGuildMember(
   token: string,
   guild_id: string,
@@ -560,6 +601,7 @@ export function getGuildMember(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#list-guild-members */
 export function listGuildMembers(
   token: string,
   guild_id: string
@@ -571,6 +613,7 @@ export function listGuildMembers(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#add-guild-member */
 export function addGuildMember(
   token: string,
   guild_id: string,
@@ -588,6 +631,7 @@ export function addGuildMember(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#modify-guild-member */
 export function modifyGuildMember(
   token: string,
   guild_id: string,
@@ -605,6 +649,7 @@ export function modifyGuildMember(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#modify-current-user-nick */
 export function modifyCurrentUserNick(
   token: string,
   guild_id: string,
@@ -617,6 +662,7 @@ export function modifyCurrentUserNick(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#add-guild-member-role */
 export function addGuildMemberRole(
   token: string,
   guild_id: string,
@@ -630,6 +676,7 @@ export function addGuildMemberRole(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#remove-guild-member-role */
 export function removeGuildMemberRole(
   token: string,
   guild_id: string,
@@ -643,6 +690,7 @@ export function removeGuildMemberRole(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#remove-guild-member */
 export function removeGuildMember(
   token: string,
   guild_id: string,
@@ -655,6 +703,7 @@ export function removeGuildMember(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#get-guild-bans */
 export function getGuildBans(
   token: string,
   guild_id: string
@@ -666,6 +715,7 @@ export function getGuildBans(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#get-guild-ban */
 export function getGuildBan(
   token: string,
   guild_id: string,
@@ -678,6 +728,7 @@ export function getGuildBan(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#create-guild-ban */
 export function createGuildBan(
   token: string,
   guild_id: string,
@@ -692,6 +743,7 @@ export function createGuildBan(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#remove-guild-ban */
 export function removeGuildBan(
   token: string,
   guild_id: string,
@@ -704,6 +756,7 @@ export function removeGuildBan(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#get-guild-roles */
 export function getGuildRoles(
   token: string,
   guild_id: string
@@ -715,6 +768,7 @@ export function getGuildRoles(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#create-guild-role */
 export function createGuildRole(
   token: string,
   guild_id: string,
@@ -731,6 +785,7 @@ export function createGuildRole(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#modify-guild-role */
 export function modifyGuildRole(
   token: string,
   guild_id: string,
@@ -748,6 +803,7 @@ export function modifyGuildRole(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#delete-guild-role */
 export function deleteGuildRole(
   token: string,
   guild_id: string,
@@ -760,6 +816,7 @@ export function deleteGuildRole(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#get-guild-prune-count */
 export function getGuildPruneCount(
   token: string,
   guild_id: string,
@@ -773,6 +830,7 @@ export function getGuildPruneCount(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#begin-guild-prune */
 export function beginGuildPrune(
   token: string,
   guild_id: string,
@@ -787,6 +845,7 @@ export function beginGuildPrune(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#get-guild-voice-regions */
 export function getGuildVoiceRegions(
   token: string,
   guild_id: string
@@ -798,6 +857,7 @@ export function getGuildVoiceRegions(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#get-guild-invites */
 export function getGuildInvites(
   token: string,
   guild_id: string
@@ -809,6 +869,7 @@ export function getGuildInvites(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#get-guild-integrations */
 export function getGuildIntegrations(
   token: string,
   guild_id: string
@@ -820,6 +881,7 @@ export function getGuildIntegrations(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#create-guild-integration */
 export function createGuildIntegration(
   token: string,
   guild_id: string,
@@ -833,6 +895,7 @@ export function createGuildIntegration(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#modify-guild-integration */
 export function modifyGuildIntegration(
   token: string,
   guild_id: string,
@@ -848,6 +911,7 @@ export function modifyGuildIntegration(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#delete-guild-integration */
 export function deleteGuildIntegration(
   token: string,
   guild_id: string,
@@ -860,6 +924,7 @@ export function deleteGuildIntegration(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#sync-guild-integration */
 export function syncGuildIntegration(
   token: string,
   guild_id: string,
@@ -872,6 +937,7 @@ export function syncGuildIntegration(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#get-guild-widget */
 export function getGuildWidget(
   token: string,
   guild_id: string
@@ -883,6 +949,7 @@ export function getGuildWidget(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#modify-guild-widget */
 export function modifyGuildWidget(
   token: string,
   guild_id: string,
@@ -896,6 +963,7 @@ export function modifyGuildWidget(
   )
 }
 
+/** https://discord.com/developers/docs/resources/guild#get-guild-vanity-url */
 export function getGuildVanityURL(
   token: string,
   guild_id: string
@@ -907,6 +975,7 @@ export function getGuildVanityURL(
   )
 }
 
+/** https://discord.com/developers/docs/resources/invite#get-invite */
 export function getInvite(
   token: string,
   invite_code: string,
@@ -919,6 +988,7 @@ export function getInvite(
   )
 }
 
+/** https://discord.com/developers/docs/resources/invite#delete-invite */
 export function deleteInvite(
   token: string,
   invite_code: string
@@ -930,6 +1000,7 @@ export function deleteInvite(
   )
 }
 
+/** https://discord.com/developers/docs/resources/user#get-current-user */
 export function getCurrentUser(
   token: string
 ) {
@@ -940,6 +1011,7 @@ export function getCurrentUser(
   )
 }
 
+/** https://discord.com/developers/docs/resources/user#get-user */
 export function getUser(
   token: string,
   user_id: string
@@ -951,6 +1023,7 @@ export function getUser(
   )
 }
 
+/** https://discord.com/developers/docs/resources/user#modify-current-user */
 export function modifyCurrentUser(
   token: string,
   username: string|undefined = undefined,
@@ -963,6 +1036,7 @@ export function modifyCurrentUser(
   )
 }
 
+/** https://discord.com/developers/docs/resources/user#get-current-user-guilds */
 export function getCurrentUserGuilds(
   token: string,
   before: string|undefined = undefined,
@@ -976,6 +1050,7 @@ export function getCurrentUserGuilds(
   )
 }
 
+/** https://discord.com/developers/docs/resources/user#leave-guild */
 export function leaveGuild(
   token: string,
   guild_id: string
@@ -987,6 +1062,7 @@ export function leaveGuild(
   )
 }
 
+/** https://discord.com/developers/docs/resources/user#create-dm */
 export function createDM(
   token: string,
   recipient_id: string
@@ -998,6 +1074,7 @@ export function createDM(
   )
 }
 
+/** https://discord.com/developers/docs/resources/user#get-user-connections */
 export function getUserConnections(
   token: string
 ) {
@@ -1008,7 +1085,8 @@ export function getUserConnections(
   )
 }
 
-export function getVoiceRegions(
+/** https://discord.com/developers/docs/resources/user#get-user-connections */
+export function listVoiceRegions(
   token: string
 ) {
   return makeRequest(
@@ -1018,6 +1096,7 @@ export function getVoiceRegions(
   )
 }
 
+/** https://discord.com/developers/docs/resources/webhook#create-webhook */
 export function createWebhook(
   token: string,
   channel_id: string,
@@ -1031,6 +1110,7 @@ export function createWebhook(
   )
 }
 
+/** https://discord.com/developers/docs/resources/webhook#get-channel-webhooks */
 export function getChannelWebhooks(
   token: string,
   channel_id: string
@@ -1042,6 +1122,7 @@ export function getChannelWebhooks(
   )
 }
 
+/** https://discord.com/developers/docs/resources/webhook#get-guild-webhooks */
 export function getGuildWebhooks(
   token: string,
   guild_id: string
@@ -1053,6 +1134,7 @@ export function getGuildWebhooks(
   )
 }
 
+/** https://discord.com/developers/docs/resources/webhook#get-webhook */
 export function getWebhook(
   token: string,
   webhook_id: string
@@ -1064,6 +1146,7 @@ export function getWebhook(
   )
 }
 
+/** https://discord.com/developers/docs/resources/webhook#get-webhook-with-token */
 export function getWebhookWithToken(
   token: string,
   webhook_id: string,
@@ -1076,6 +1159,7 @@ export function getWebhookWithToken(
   )
 }
 
+/** https://discord.com/developers/docs/resources/webhook#modify-webhook */
 export function modifyWebhook(
   token: string,
   webhook_id: string,
@@ -1090,6 +1174,7 @@ export function modifyWebhook(
   )
 }
 
+/** https://discord.com/developers/docs/resources/webhook#modify-webhook-with-token */
 export function modifyWebhookWithToken(
   token: string,
   webhook_id: string,
@@ -1105,6 +1190,7 @@ export function modifyWebhookWithToken(
   )
 }
 
+/** https://discord.com/developers/docs/resources/webhook#delete-webhook */
 export function deleteWebhook(
   token: string,
   webhook_id: string
@@ -1116,6 +1202,7 @@ export function deleteWebhook(
   )
 }
 
+/** https://discord.com/developers/docs/resources/webhook#delete-webhook-with-token */
 export function deleteWebhookWithToken(
   token: string,
   webhook_id: string,
@@ -1128,6 +1215,7 @@ export function deleteWebhookWithToken(
   )
 }
 
+/** https://discord.com/developers/docs/resources/webhook#execute-webhook */
 export function executeWebhook(
   token: string,
   webhook_id: string,
@@ -1149,92 +1237,180 @@ export function executeWebhook(
 }
 
 export default function boundTo(token: string) { return {
+  /** https://discord.com/developers/docs/topics/gateway#get-gateway */
   getGateway: getGateway.bind(null, token),
+  /** https://discord.com/developers/docs/topics/gateway#get-gateway-bot */
   getGatewayBot: getGatewayBot.bind(null, token),
+  /** https://discord.com/developers/docs/resources/audit-log#get-guild-audit-log */
   getGuildAuditLog: getGuildAuditLog.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#get-channel */
   getChannel: getChannel.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#modify-channel */
   modifyChannel: modifyChannel.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#deleteclose-channel */
   deleteChannel: deleteChannel.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#get-channel-messages */
   getChannelMessages: getChannelMessages.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#get-channel-message */
   getChannelMessage: getChannelMessage.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#create-message */
   createMessage: createMessage.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#create-reaction */
   createReaction: createReaction.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#delete-own-reaction */
   deleteOwnReaction: deleteOwnReaction.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#delete-user-reaction */
   deleteUserReaction: deleteUserReaction.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#get-reactions */
   getReactions: getReactions.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#delete-all-reactions */
   deleteAllReactions: deleteAllReactions.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#delete-all-reactions-for-emoji */
   deleteAllReactionsForEmoji: deleteAllReactionsForEmoji.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#edit-message */
   editMessage: editMessage.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#delete-message */
   deleteMessage: deleteMessage.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#bulk-delete-messages */
   bulkDeleteMessages: bulkDeleteMessages.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#edit-channel-permissions */
   editChannelPermissions: editChannelPermissions.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#get-channel-invites */
   getChannelInvites: getChannelInvites.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#create-channel-invite */
   createChannelInvite: createChannelInvite.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#delete-channel-permission */
   deleteChannelPermission: deleteChannelPermission.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#trigger-typing-indicator */
   triggerTypingIndicator: triggerTypingIndicator.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#get-pinned-messages */
   getPinnedMessages: getPinnedMessages.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#add-pinned-channel-message */
   addPinnedChannelMessage: addPinnedChannelMessage.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#delete-pinned-channel-message */
   deletePinnedChannelMessage: deletePinnedChannelMessage.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#group-dm-add-recipient */
   groupDMAddRecipient: groupDMAddRecipient.bind(null, token),
+  /** https://discord.com/developers/docs/resources/channel#group-dm-remove-recipient */
   groupDMRemoveRecipient: groupDMRemoveRecipient.bind(null, token),
+  /** https://discord.com/developers/docs/resources/emoji#list-guild-emojis */
   listGuildEmojis: listGuildEmojis.bind(null, token),
+  /** https://discord.com/developers/docs/resources/emoji#get-guild-emoji */
   getGuildEmoji: getGuildEmoji.bind(null, token),
+  /** https://discord.com/developers/docs/resources/emoji#create-guild-emoji */
   createGuildEmoji: createGuildEmoji.bind(null, token),
+  /** https://discord.com/developers/docs/resources/emoji#modify-guild-emoji */
   modifyGuildEmoji: modifyGuildEmoji.bind(null, token),
+  /** https://discord.com/developers/docs/resources/emoji#delete-guild-emoji */
   deleteGuildEmoji: deleteGuildEmoji.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#create-guild */
   createGuild: createGuild.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#get-guild */
   getGuild: getGuild.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#get-guild-preview */
   getGuildPreview: getGuildPreview.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#modify-guild */
   modifyGuild: modifyGuild.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#delete-guild */
   deleteGuild: deleteGuild.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#get-guild-channels */
   getGuildChannels: getGuildChannels.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#create-guild-channel */
   createGuildChannel: createGuildChannel.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#get-guild-member */
   getGuildMember: getGuildMember.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#list-guild-members */
   listGuildMembers: listGuildMembers.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#add-guild-member */
   addGuildMember: addGuildMember.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#modify-guild-member */
   modifyGuildMember: modifyGuildMember.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#modify-current-user-nick */
   modifyCurrentUserNick: modifyCurrentUserNick.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#add-guild-member-role */
   addGuildMemberRole: addGuildMemberRole.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#remove-guild-member-role */
   removeGuildMemberRole: removeGuildMemberRole.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#remove-guild-member */
   removeGuildMember: removeGuildMember.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#get-guild-bans */
   getGuildBans: getGuildBans.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#get-guild-ban */
   getGuildBan: getGuildBan.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#create-guild-ban */
   createGuildBan: createGuildBan.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#remove-guild-ban */
   removeGuildBan: removeGuildBan.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#get-guild-roles */
   getGuildRoles: getGuildRoles.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#create-guild-role */
   createGuildRole: createGuildRole.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#modify-guild-role */
   modifyGuildRole: modifyGuildRole.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#delete-guild-role */
   deleteGuildRole: deleteGuildRole.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#get-guild-prune-count */
   getGuildPruneCount: getGuildPruneCount.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#begin-guild-prune */
   beginGuildPrune: beginGuildPrune.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#get-guild-voice-regions */
   getGuildVoiceRegions: getGuildVoiceRegions.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#get-guild-invites */
   getGuildInvites: getGuildInvites.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#get-guild-integrations */
   getGuildIntegrations: getGuildIntegrations.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#create-guild-integration */
   createGuildIntegration: createGuildIntegration.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#modify-guild-integration */
   modifyGuildIntegration: modifyGuildIntegration.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#delete-guild-integration */
   deleteGuildIntegration: deleteGuildIntegration.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#sync-guild-integration */
   syncGuildIntegration: syncGuildIntegration.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#get-guild-widget */
   getGuildWidget: getGuildWidget.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#modify-guild-widget */
   modifyGuildWidget: modifyGuildWidget.bind(null, token),
+  /** https://discord.com/developers/docs/resources/guild#get-guild-vanity-url */
   getGuildVanityURL: getGuildVanityURL.bind(null, token),
+  /** https://discord.com/developers/docs/resources/invite#get-invite */
   getInvite: getInvite.bind(null, token),
+  /** https://discord.com/developers/docs/resources/invite#delete-invite */
   deleteInvite: deleteInvite.bind(null, token),
+  /** https://discord.com/developers/docs/resources/user#get-current-user */
   getCurrentUser: getCurrentUser.bind(null, token),
+  /** https://discord.com/developers/docs/resources/user#get-user */
   getUser: getUser.bind(null, token),
+  /** https://discord.com/developers/docs/resources/user#modify-current-user */
   modifyCurrentUser: modifyCurrentUser.bind(null, token),
+  /** https://discord.com/developers/docs/resources/user#get-current-user-guilds */
   getCurrentUserGuilds: getCurrentUserGuilds.bind(null, token),
+  /** https://discord.com/developers/docs/resources/user#leave-guild */
   leaveGuild: leaveGuild.bind(null, token),
+  /** https://discord.com/developers/docs/resources/user#create-dm */
   createDM: createDM.bind(null, token),
+  /** https://discord.com/developers/docs/resources/user#get-user-connections */
   getUserConnections: getUserConnections.bind(null, token),
-  getVoiceRegions: getVoiceRegions.bind(null, token),
+  /** https://discord.com/developers/docs/resources/user#get-user-connections */
+  listVoiceRegions: listVoiceRegions.bind(null, token),
+  /** https://discord.com/developers/docs/resources/webhook#create-webhook */
   createWebhook: createWebhook.bind(null, token),
+  /** https://discord.com/developers/docs/resources/webhook#get-channel-webhooks */
   getChannelWebhooks: getChannelWebhooks.bind(null, token),
+  /** https://discord.com/developers/docs/resources/webhook#get-guild-webhooks */
   getGuildWebhooks: getGuildWebhooks.bind(null, token),
+  /** https://discord.com/developers/docs/resources/webhook#get-webhook */
   getWebhook: getWebhook.bind(null, token),
+  /** https://discord.com/developers/docs/resources/webhook#get-webhook-with-token */
   getWebhookWithToken: getWebhookWithToken.bind(null, token),
+  /** https://discord.com/developers/docs/resources/webhook#modify-webhook */
   modifyWebhook: modifyWebhook.bind(null, token),
+  /** https://discord.com/developers/docs/resources/webhook#modify-webhook-with-token */
   modifyWebhookWithToken: modifyWebhookWithToken.bind(null, token),
+  /** https://discord.com/developers/docs/resources/webhook#delete-webhook */
   deleteWebhook: deleteWebhook.bind(null, token),
+  /** https://discord.com/developers/docs/resources/webhook#delete-webhook-with-token */
   deleteWebhookWithToken: deleteWebhookWithToken.bind(null, token),
+  /** https://discord.com/developers/docs/resources/webhook#execute-webhook */
   executeWebhook: executeWebhook.bind(null, token),
 }}
